@@ -1,0 +1,25 @@
+/* Дополнительные адаптивные стили */
+
+/* Для очень маленьких экранов */
+@media (max-width: 400px) {
+    .logo__text {
+        display: none;
+    }
+    
+    .card__header {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-sm);
+    }
+}
+
+/* Для ландшафтной ориентации на мобильных */
+@media (max-height: 500px) and (orientation: landscape) {
+    .header {
+        position: static;
+    }
+    
+    .header__inner {
+        padding: var(--space-xs) 0;
+    }
+}

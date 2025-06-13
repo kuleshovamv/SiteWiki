@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Википедия - Справочник для начинающих</title>
+    <meta name="description" content="Полный справочник по языку программирования C++ для студентов первого курса">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/prism.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+    
+    <!-- Иконка -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <a href="index.html" class="logo">
+                    <span class="logo__icon">C++</span>
+                    <span class="logo__text">Википедия</span>
+                </a>
+                
+                <!-- Навигация -->
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="index.html" class="nav__link active">Главная</a></li>
+                        <li class="nav__item"><a href="chapters/basics/variables.html" class="nav__link">Основы</a></li>
+                        <li class="nav__item"><a href="chapters/functions/declaration.html" class="nav__link">Функции</a></li>
+                        <li class="nav__item"><a href="chapters/pointers/pointers-basics.html" class="nav__link">Указатели</a></li>
+                        <li class="nav__item"><a href="chapters/oop/classes.html" class="nav__link">ООП</a></li>
+                        <li class="nav__item"><a href="chapters/stl/vectors.html" class="nav__link">STL</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Поиск -->
+                <div class="search">
+                    <form action="search.html" method="GET" class="search__form">
+                        <input type="text" name="q" placeholder="Поиск по справочнику..." class="search__input">
+                        <button type="submit" class="search__button">
+                            <svg class="search__icon" viewBox="0 0 24 24">
+                                <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Мобильное меню -->
+                <button class="menu-toggle" aria-label="Меню">
+                    <span class="menu-toggle__line"></span>
+                    <span class="menu-toggle__line"></span>
+                    <span class="menu-toggle__line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основное содержимое -->
+    <main class="main">
+        <div class="container">
+            <!-- Хлебные крошки -->
+            <nav class="breadcrumbs">
+                <ul class="breadcrumbs__list">
+                    <li class="breadcrumbs__item"><a href="index.html" class="breadcrumbs__link">Главная</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Заголовок -->
+            <h1 class="page-title">Справочник по C++ для начинающих</h1>
+            
+            <!-- Введение -->
+            <section class="intro">
+                <p>Добро пожаловать в справочник по языку программирования C++! Этот ресурс предназначен для студентов первого курса и всех, кто начинает изучать этот мощный язык программирования.</p>
+                <p>Здесь вы найдете подробные объяснения основных концепций, примеры кода и практические рекомендации.</p>
+            </section>
+            
+            <!-- Разделы -->
+            <section class="sections">
+                <h2 class="sections__title">Разделы справочника</h2>
+                
+                <div class="cards">
+                    <!-- Основы -->
+                    <article class="card">
+                        <div class="card__header">
+                            <h3 class="card__title">Основы языка</h3>
+                            <span class="card__icon">🧠</span>
+                        </div>
+                        <div class="card__content">
+                            <p>Переменные, типы данных, операторы, условия, циклы и массивы - фундамент для изучения C++.</p>
+                            <ul class="card__topics">
+                                <li>Переменные и типы данных</li>
+                                <li>Операторы и выражения</li>
+                                <li>Условные конструкции</li>
+                                <li>Циклы</li>
+                                <li>Массивы</li>
+                            </ul>
+                        </div>
+                        <div class="card__footer">
+                            <a href="chapters/basics/variables.html" class="card__link">Начать изучение</a>
+                        </div>
+                    </article>
+                    
+                    <!-- Функции -->
+                    <article class="card">
+                        <div class="card__header">
+                            <h3 class="card__title">Функции</h3>
+                            <span class="card__icon">🔧</span>
+                        </div>
+                        <div class="card__content">
+                            <p>Функции - это строительные блоки программ на C++. Узнайте, как их создавать и использовать.</p>
+                            <ul class="card__topics">
+                                <li>Объявление и определение</li>
+                                <li>Параметры и возвращаемые значения</li>
+                                <li>Перегрузка функций</li>
+                                <li>Рекурсия</li>
+                            </ul>
+                        </div>
+                        <div class="card__footer">
+                            <a href="chapters/functions/declaration.html" class="card__link">Начать изучение</a>
+                        </div>
+                    </article>
+                    
+                    <!-- Указатели -->
+                    <article class="card">
+                        <div class="card__header">
+                            <h3 class="card__title">Указатели и ссылки</h3>
+                            <span class="card__icon">📍</span>
+                        </div>
+                        <div class="card__content">
+                            <p>Одна из самых мощных и сложных возможностей C++ - работа с памятью через указатели.</p>
+                            <ul class="card__topics">
+                                <li>Основы указателей</li>
+                                <li>Ссылки</li>
+                                <li>Динамическая память</li>
+                                <li>Указатели на функции</li>
+                            </ul>
+                        </div>
+                        <div class="card__footer">
+                            <a href="chapters/pointers/pointers-basics.html" class="card__link">Начать изучение</a>
+                        </div>
+                    </article>
+                    
+                    <!-- ООП -->
+                    <article class="card">
+                        <div class="card__header">
+                            <h3 class="card__title">Объектно-ориентированное программирование</h3>
+                            <span class="card__icon">🏛️</span>
+                        </div>
+                        <div class="card__content">
+                            <p>C++ поддерживает ООП - парадигму, основанную на объектах, классах и их взаимодействиях.</p>
+                            <ul class="card__topics">
+                                <li>Классы и объекты</li>
+                                <li>Конструкторы и деструкторы</li>
+                                <li>Наследование</li>
+                                <li>Полиморфизм</li>
+                            </ul>
+                        </div>
+                        <div class="card__footer">
+                            <a href="chapters/oop/classes.html" class="card__link">Начать изучение</a>
+                        </div>
+                    </article>
+                    
+                    <!-- STL -->
+                    <article class="card">
+                        <div class="card__header">
+                            <h3 class="card__title">Стандартная библиотека (STL)</h3>
+                            <span class="card__icon">📚</span>
+                        </div>
+                        <div class="card__content">
+                            <p>STL предоставляет мощные инструменты: контейнеры, алгоритмы и итераторы для эффективной работы.</p>
+                            <ul class="card__topics">
+                                <li>Векторы и строки</li>
+                                <li>Алгоритмы</li>
+                                <li>Итераторы</li>
+                                <li>Потоки ввода/вывода</li>
+                            </ul>
+                        </div>
+                        <div class="card__footer">
+                            <a href="chapters/stl/vectors.html" class="card__link">Начать изучение</a>
+                        </div>
+                    </article>
+                    
+                    <!-- Быстрый старт -->
+                    <article class="card card--highlight">
+                        <div class="card__header">
+                            <h3 class="card__title">Быстрый старт</h3>
+                            <span class="card__icon">🚀</span>
+                        </div>
+                        <div class="card__content">
+                            <p>Ваша первая программа на C++:</p>
+                            <pre><code class="language-cpp">#include &lt;iostream&gt;
+
+int main() {
+    std::cout << "Привет, мир!" << std::endl;
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="card__footer">
+                            <button class="card__button copy-button" data-target="code1">Копировать код</button>
+                        </div>
+                    </article>
+                </div>
+            </section>
+            
+            <!-- Дополнительная информация -->
+            <section class="additional-info">
+                <h2 class="additional-info__title">Полезные советы</h2>
+                <div class="tips">
+                    <div class="tip">
+                        <h3 class="tip__title">Как изучать C++ эффективно?</h3>
+                        <ol class="tip__list">
+                            <li>Начинайте с основ - синтаксис, переменные, операторы</li>
+                            <li>Пишите код каждый день, даже понемногу</li>
+                            <li>Разбирайте чужой код и экспериментируйте с ним</li>
+                            <li>Не бойтесь ошибок - они часть обучения</li>
+                            <li>Изучайте документацию и стандарт языка</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="tip">
+                        <h3 class="tip__title">Ресурсы для углубленного изучения</h3>
+                        <ul class="tip__list">
+                            <li><a href="https://isocpp.org/" target="_blank">Официальный сайт C++</a></li>
+                            <li><a href="https://en.cppreference.com/w/" target="_blank">cppreference.com</a></li>
+                            <li><a href="https://www.learncpp.com/" target="_blank">LearnCpp.com</a></li>
+                            <li><a href="https://stackoverflow.com/questions/tagged/c%2b%2b" target="_blank">Stack Overflow</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <div class="footer__col">
+                    <h3 class="footer__title">C++ Википедия</h3>
+                    <p class="footer__text">Справочник по языку программирования C++ для начинающих.</p>
+                </div>
+                
+                <div class="footer__col">
+                    <h3 class="footer__title">Разделы</h3>
+                    <ul class="footer__list">
+                        <li><a href="chapters/basics/variables.html" class="footer__link">Основы</a></li>
+                        <li><a href="chapters/functions/declaration.html" class="footer__link">Функции</a></li>
+                        <li><a href="chapters/pointers/pointers-basics.html" class="footer__link">Указатели</a></li>
+                        <li><a href="chapters/oop/classes.html" class="footer__link">ООП</a></li>
+                        <li><a href="chapters/stl/vectors.html" class="footer__link">STL</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer__col">
+                    <h3 class="footer__title">Контакты</h3>
+                    <ul class="footer__list">
+                        <li><a href="mailto:info@cppwiki.example" class="footer__link">Email</a></li>
+                        <li><a href="https://github.com/yourusername/cpp-wiki" class="footer__link">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p class="footer__copyright">© 2023 C++ Википедия. Все права защищены.</p>
+                <a href="#" class="footer__to-top" id="to-top">Наверх ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/prism.js"></script>
+    <script src="js/copy-code.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
