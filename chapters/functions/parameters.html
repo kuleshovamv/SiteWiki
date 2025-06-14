@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Параметры и возвращаемые значения | C++ Вики</title>
+    <meta name="description" content="Подробное руководство по работе с параметрами и возвращаемыми значениями функций в C++">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/prism.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <a href="../../index.html" class="logo">
+                    <span class="logo__icon">C++</span>
+                    <span class="logo__text">Вики</span>
+                </a>
+                
+                <!-- Навигация -->
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="../../index.html" class="nav__link">Главная</a></li>
+                        <li class="nav__item"><a href="../basics/variables.html" class="nav__link">Основы</a></li>
+                        <li class="nav__item"><a href="declaration.html" class="nav__link">Функции</a></li>
+                        <li class="nav__item"><a href="parameters.html" class="nav__link active">Параметры</a></li>
+                        <li class="nav__item"><a href="../pointers/pointers-basics.html" class="nav__link">Указатели</a></li>
+                        <li class="nav__item"><a href="../oop/classes.html" class="nav__link">ООП</a></li>
+                        <li class="nav__item"><a href="../stl/vectors.html" class="nav__link">STL</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Поиск -->
+                <div class="search">
+                    <form action="../../search.html" method="GET" class="search__form">
+                        <input type="text" name="q" placeholder="Поиск по справочнику..." class="search__input">
+                        <button type="submit" class="search__button">
+                            <svg class="search__icon" viewBox="0 0 24 24">
+                                <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Мобильное меню -->
+                <button class="menu-toggle" aria-label="Меню">
+                    <span class="menu-toggle__line"></span>
+                    <span class="menu-toggle__line"></span>
+                    <span class="menu-toggle__line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основное содержимое -->
+    <main class="main">
+        <div class="container">
+            <!-- Хлебные крошки -->
+            <nav class="breadcrumbs">
+                <ul class="breadcrumbs__list">
+                    <li class="breadcrumbs__item"><a href="../../index.html" class="breadcrumbs__link">Главная</a></li>
+                    <li class="breadcrumbs__item"><a href="declaration.html" class="breadcrumbs__link">Функции</a></li>
+                    <li class="breadcrumbs__item">Параметры и возвращаемые значения</li>
+                </ul>
+            </nav>
+            
+            <!-- Заголовок -->
+            <h1 class="page-title">Параметры и возвращаемые значения функций</h1>
+            
+            <!-- Введение -->
+            <section class="intro">
+                <p>Параметры и возвращаемые значения - ключевые аспекты работы с функциями в C++. Они определяют, как данные передаются в функцию и возвращаются из неё.</p>
+                <p>В этом разделе вы узнаете о различных способах передачи параметров и возврата значений из функций.</p>
+            </section>
+            
+            <!-- Содержание статьи -->
+            <article class="article">
+                <h2>Передача параметров по значению</h2>
+                <p>При передаче по значению функция получает копию аргумента:</p>
+                
+                <pre><code class="language-cpp line-numbers" id="code1">void increment(int x) {
+    x++; // Изменяется только локальная копия
+}
+
+int main() {
+    int num = 5;
+    increment(num);
+    std::cout << num; // Выведет 5 (оригинал не изменился)
+    return 0;
+}</code><button class="copy-button" data-target="code1" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <div class="note">
+                    <h3 class="note__title">Примечание</h3>
+                    <p>Передача по значению безопасна, но может быть неэффективна для больших объектов, так как создается полная копия.</p>
+                </div>
+                
+                <h2>Передача параметров по ссылке</h2>
+                <p>Передача по ссылке позволяет изменять оригинальные переменные:</p>
+                
+                <pre><code class="language-cpp line-numbers" id="code2">void increment(int &x) {
+    x++; // Изменяется оригинальная переменная
+}
+
+int main() {
+    int num = 5;
+    increment(num);
+    std::cout << num; // Выведет 6 (оригинал изменился)
+    return 0;
+}</code><button class="copy-button" data-target="code2" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Константные ссылки</h2>
+                <p>Константные ссылки позволяют избежать копирования и гарантируют, что объект не будет изменен:</p>
+                
+                <pre><code class="language-cpp line-numbers" id="code3">void printLargeObject(const BigObject &obj) {
+    // obj нельзя изменить, но копирования не происходит
+    obj.print();
+}</code><button class="copy-button" data-target="code3" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Передача указателей</h2>
+                <p>Указатели также позволяют изменять оригинальные переменные:</p>
+                
+                <pre><code class="language-cpp line-numbers" id="code4">void increment(int *x) {
+    (*x)++; // Изменяем значение по указателю
+}
+
+int main() {
+    int num = 5;
+    increment(&num); // Передаем адрес переменной
+    std::cout << num; // Выведет 6
+    return 0;
+}</code><button class="copy-button" data-target="code4" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <div class="warning">
+                    <h3 class="warning__title">Осторожно с указателями</h3>
+                    <p>При работе с указателями нужно быть уверенным, что они не являются nullptr и указывают на допустимую область памяти.</p>
+                </div>
+                
+                <h2>Возвращаемые значения</h2>
+                <p>Функции могут возвращать значения любого типа:</p>
+                
+                <pre><code class="language-cpp line-numbers" id="code5">// Возврат простого типа
+int square(int x) {
+    return x * x;
+}
+
+// Возврат ссылки
+int& getElement(std::vector<int> &vec, int index) {
+    return vec[index];
+}
+
+// Возврат указателя
+int* findValue(int *arr, int size, int value) {
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == value) {
+            return &arr[i];
+        }
+    }
+    return nullptr;
+}</code><button class="copy-button" data-target="code5" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Возврат по значению, ссылке и указателю</h2>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Способ возврата</th>
+                                <th>Пример</th>
+                                <th>Когда использовать</th>
+                                <th>Опасности</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>По значению</td>
+                                <td><code>int func()</code></td>
+                                <td>Простые типы, маленькие объекты</td>
+                                <td>Копирование больших объектов</td>
+                            </tr>
+                            <tr>
+                                <td>По ссылке</td>
+                                <td><code>int& func()</code></td>
+                                <td>Изменяемые объекты, избегание копирования</td>
+                                <td>Возврат ссылки на локальную переменную</td>
+                            </tr>
+                            <tr>
+                                <td>По константной ссылке</td>
+                                <td><code>const int& func()</code></td>
+                                <td>Большие неизменяемые объекты</td>
+                                <td>Те же, что и для обычной ссылки</td>
+                            </tr>
+                            <tr>
+                                <td>По указателю</td>
+                                <td><code>int* func()</code></td>
+                                <td>Динамическая память, опциональные значения</td>
+                                <td>Утечки памяти, висячие указатели</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h2>Возврат нескольких значений</h2>
+                <p>В C++ есть несколько способов вернуть несколько значений из функции:</p>
+                
+                <h3>1. Через параметры по ссылке</h3>
+                <pre><code class="language-cpp line-numbers" id="code6">void getMinMax(const int *arr, int size, int &min, int &max) {
+    min = arr[0];
+    max = arr[0];
+    for (int i = 1; i < size; i++) {
+        if (arr[i] < min) min = arr[i];
+        if (arr[i] > max) max = arr[i];
+    }
+}
+
+int main() {
+    int arr[] = {3, 1, 4, 1, 5, 9};
+    int min, max;
+    getMinMax(arr, 6, min, max);
+    // min = 1, max = 9
+}</code><button class="copy-button" data-target="code6" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h3>2. Через структуру или кортеж</h3>
+                <pre><code class="language-cpp line-numbers" id="code7">#include &lt;tuple&gt;
+
+std::tuple&lt;int, int, double&gt; calculateStats(int a, int b) {
+    return {a + b, a * b, static_cast&lt;double&gt;(a) / b};
+}
+
+int main() {
+    auto [sum, product, quotient] = calculateStats(10, 4);
+    // sum = 14, product = 40, quotient = 2.5
+}</code><button class="copy-button" data-target="code7" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <div class="tip">
+                    <h3 class="tip__title">Совет</h3>
+                    <p>Для возврата нескольких значений в C++17 и новее удобно использовать structured binding (как в примере выше с кортежем).</p>
+                </div>
+            </article>
+            
+            <!-- Навигация между статьями -->
+            <div class="article-navigation">
+                <a href="overloading.html" class="button">Следующая статья: Перегрузка функций →</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <div class="footer__col">
+                    <h3 class="footer__title">C++ Вики</h3>
+                    <p class="footer__text">Справочник по языку программирования C++ для начинающих.</p>
+                </div>
+                
+                <div class="footer__col">
+                    <h3 class="footer__title">Разделы</h3>
+                    <ul class="footer__list">
+                        <li><a href="../../chapters/basics/variables.html" class="footer__link">Основы</a></li>
+                        <li><a href="../../chapters/functions/declaration.html" class="footer__link">Функции</a></li>
+                        <li><a href="../../chapters/pointers/pointers-basics.html" class="footer__link">Указатели</a></li>
+                        <li><a href="../../chapters/oop/classes.html" class="footer__link">ООП</a></li>
+                        <li><a href="../../chapters/stl/vectors.html" class="footer__link">STL</a></li>
+                    </ul>
+                </div>
+        
+                <div class="footer__col">
+                    <h3 class="footer__title">Автор проекта</h3>
+                    <ul class="footer__list">
+                        <li>Студент: Иванов И.И.</li>
+                        <li>Группа: ПИ-123</li>
+                        <li>ВУЗ: НИУ "МЭИ"</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p class="footer__copyright">2025 C++ Вики</p>
+                <a href="#" class="footer__to-top" id="to-top">Наверх ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../../js/prism.js"></script>
+    <script src="../../js/copy-code.js"></script>
+    <script src="../../js/main.js"></script>
+</body>
+</html>

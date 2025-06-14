@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рекурсия в C++ | C++ Вики</title>
+    <meta name="description" content="Подробное руководство по рекурсивным функциям в языке C++ для начинающих">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/prism.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <a href="../../index.html" class="logo">
+                    <span class="logo__icon">C++</span>
+                    <span class="logo__text">Вики</span>
+                </a>
+                
+                <!-- Навигация -->
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="../../index.html" class="nav__link">Главная</a></li>
+                        <li class="nav__item"><a href="../basics/variables.html" class="nav__link">Основы</a></li>
+                        <li class="nav__item"><a href="declaration.html" class="nav__link">Функции</a></li>
+                        <li class="nav__item"><a href="recursion.html" class="nav__link active">Рекурсия</a></li>
+                        <li class="nav__item"><a href="../pointers/pointers-basics.html" class="nav__link">Указатели</a></li>
+                        <li class="nav__item"><a href="../oop/classes.html" class="nav__link">ООП</a></li>
+                        <li class="nav__item"><a href="../stl/vectors.html" class="nav__link">STL</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Поиск -->
+                <div class="search">
+                    <form action="../../search.html" method="GET" class="search__form">
+                        <input type="text" name="q" placeholder="Поиск по справочнику..." class="search__input">
+                        <button type="submit" class="search__button">
+                            <svg class="search__icon" viewBox="0 0 24 24">
+                                <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Мобильное меню -->
+                <button class="menu-toggle" aria-label="Меню">
+                    <span class="menu-toggle__line"></span>
+                    <span class="menu-toggle__line"></span>
+                    <span class="menu-toggle__line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основное содержимое -->
+    <main class="main">
+        <div class="container">
+            <!-- Хлебные крошки -->
+            <nav class="breadcrumbs">
+                <ul class="breadcrumbs__list">
+                    <li class="breadcrumbs__item"><a href="../../index.html" class="breadcrumbs__link">Главная</a></li>
+                    <li class="breadcrumbs__item"><a href="declaration.html" class="breadcrumbs__link">Функции</a></li>
+                    <li class="breadcrumbs__item">Рекурсия</li>
+                </ul>
+            </nav>
+            
+            <!-- Заголовок -->
+            <h1 class="page-title">Рекурсия в C++</h1>
+            
+            <!-- Введение -->
+            <section class="intro">
+                <p>Рекурсия - это процесс, в котором функция вызывает саму себя прямо или косвенно. Это мощный инструмент для решения задач, которые можно разбить на более простые подзадачи того же типа.</p>
+                <p>В этом разделе вы узнаете, как правильно использовать рекурсию в C++ и избегать распространенных ошибок.</p>
+            </section>
+            
+            <!-- Содержание статьи -->
+            <article class="article">
+                <h2>Основы рекурсии</h2>
+                <p>Любая рекурсивная функция должна содержать:</p>
+                <ol>
+                    <li><strong>Базовый случай</strong> - условие выхода из рекурсии</li>
+                    <li><strong>Рекурсивный случай</strong> - вызов функции с измененными параметрами</li>
+                </ol>
+                
+                <pre><code class="language-cpp line-numbers" id="code1">// Пример: вычисление факториала
+int factorial(int n) {
+    // Базовый случай
+    if (n == 0 || n == 1) {
+        return 1;
+    }
+    // Рекурсивный случай
+    return n * factorial(n - 1);
+}
+
+int main() {
+    std::cout << "5! = " << factorial(5) << std::endl; // 120
+    return 0;
+}</code><button class="copy-button" data-target="code1" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <div class="warning">
+                    <h3 class="warning__title">Важно!</h3>
+                    <p>Отсутствие базового случая или неправильное его определение приведет к бесконечной рекурсии и переполнению стека.</p>
+                </div>
+                
+                <h2>Прямая и косвенная рекурсия</h2>
+                
+                <h3>1. Прямая рекурсия</h3>
+                <p>Функция вызывает саму себя непосредственно:</p>
+                <pre><code class="language-cpp line-numbers" id="code2">void countDown(int n) {
+    if (n <= 0) {
+        std::cout << "Пуск!";
+        return;
+    }
+    std::cout << n << "...\n";
+    countDown(n - 1); // Прямой вызов
+}</code><button class="copy-button" data-target="code2" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h3>2. Косвенная рекурсия</h3>
+                <p>Функция A вызывает функцию B, которая вызывает функцию A:</p>
+                <pre><code class="language-cpp line-numbers" id="code3">void functionA(int n);
+
+void functionB(int n) {
+    if (n <= 0) return;
+    std::cout << "B: " << n << "\n";
+    functionA(n - 1); // Косвенный вызов
+}
+
+void functionA(int n) {
+    if (n <= 0) return;
+    std::cout << "A: " << n << "\n";
+    functionB(n - 2); // Косвенный вызов
+}</code><button class="copy-button" data-target="code3" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Рекурсия vs Итерация</h2>
+                <p>Рекурсивные решения часто более лаконичны, но могут быть менее эффективны:</p>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Критерий</th>
+                                <th>Рекурсия</th>
+                                <th>Итерация</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Читаемость</td>
+                                <td>Выше для рекурсивных задач</td>
+                                <td>Менее интуитивна для некоторых задач</td>
+                            </tr>
+                            <tr>
+                                <td>Производительность</td>
+                                <td>Медленнее (вызовы функции, стек)</td>
+                                <td>Быстрее</td>
+                            </tr>
+                            <tr>
+                                <td>Использование памяти</td>
+                                <td>Может вызвать переполнение стека</td>
+                                <td>Обычно более эффективно</td>
+                            </tr>
+                            <tr>
+                                <td>Применение</td>
+                                <td>Деревья, графы, задачи "разделяй и властвуй"</td>
+                                <td>Простые линейные алгоритмы</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h2>Хвостовая рекурсия</h2>
+                <p>Особый вид рекурсии, где рекурсивный вызов - последняя операция в функции:</p>
+                <pre><code class="language-cpp line-numbers" id="code4">// Обычная рекурсия
+int factorial(int n) {
+    if (n == 0) return 1;
+    return n * factorial(n - 1); // Не хвостовая
+}
+
+// Хвостовая рекурсия
+int factorialTail(int n, int accumulator = 1) {
+    if (n == 0) return accumulator;
+    return factorialTail(n - 1, n * accumulator); // Хвостовая
+}</code><button class="copy-button" data-target="code4" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <div class="tip">
+                    <h3 class="tip__title">Оптимизация хвостовой рекурсии</h3>
+                    <p>Некоторые компиляторы могут оптимизировать хвостовую рекурсию, преобразуя ее в итерацию и избегая переполнения стека.</p>
+                </div>
+                
+                <h2>Практические примеры рекурсии</h2>
+                
+                <h3>1. Числа Фибоначчи</h3>
+                <pre><code class="language-cpp line-numbers" id="code5">int fibonacci(int n) {
+    if (n <= 1) return n;
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+// Оптимизированная версия с мемоизацией
+int fibMemo(int n, std::vector&lt;int&gt;& memo) {
+    if (n <= 1) return n;
+    if (memo[n] != -1) return memo[n];
+    memo[n] = fibMemo(n - 1, memo) + fibMemo(n - 2, memo);
+    return memo[n];
+}</code><button class="copy-button" data-target="code5" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h3>2. Обход дерева</h3>
+                <pre><code class="language-cpp line-numbers" id="code6">struct TreeNode {
+    int value;
+    TreeNode* left;
+    TreeNode* right;
+};
+
+void inorderTraversal(TreeNode* node) {
+    if (node == nullptr) return;
+    inorderTraversal(node->left);
+    std::cout << node->value << " ";
+    inorderTraversal(node->right);
+}</code><button class="copy-button" data-target="code6" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h3>3. Быстрая сортировка (QuickSort)</h3>
+                <pre><code class="language-cpp line-numbers" id="code7">void quickSort(int arr[], int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high); // Функция разделения
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}</code><button class="copy-button" data-target="code7" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h3>4. Ханойская башня</h3>
+                <pre><code class="language-cpp line-numbers" id="code8">void hanoi(int n, char from, char to, char aux) {
+    if (n == 1) {
+        std::cout << "Переместить диск 1 с " << from << " на " << to << std::endl;
+        return;
+    }
+    hanoi(n - 1, from, aux, to);
+    std::cout << "Переместить диск " << n << " с " << from << " на " << to << std::endl;
+    hanoi(n - 1, aux, to, from);
+}</code><button class="copy-button" data-target="code8" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Опасности рекурсии</h2>
+                <ul>
+                    <li><strong>Переполнение стека</strong> - слишком глубокая рекурсия</li>
+                    <li><strong>Повторные вычисления</strong> - как в наивной реализации Фибоначчи</li>
+                    <li><strong>Избыточное использование памяти</strong> - каждый вызов сохраняет контекст</li>
+                </ul>
+                
+                <div class="tip">
+                    <h3 class="tip__title">Когда использовать рекурсию?</h3>
+                    <p>Рекурсия хорошо подходит для задач с рекурсивной природой (обход деревьев, алгоритмы "разделяй и властвуй"). Для простых линейных задач лучше использовать итерацию.</p>
+                </div>
+            </article>
+            
+            <!-- Навигация между статьями -->
+            <div class="article-navigation">
+                <a href="../pointers/pointers-basics.html" class="button">Следующая глава: Указатели →</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <div class="footer__col">
+                    <h3 class="footer__title">C++ Вики</h3>
+                    <p class="footer__text">Справочник по языку программирования C++ для начинающих.</p>
+                </div>
+                
+                <div class="footer__col">
+                    <h3 class="footer__title">Разделы</h3>
+                    <ul class="footer__list">
+                        <li><a href="../../chapters/basics/variables.html" class="footer__link">Основы</a></li>
+                        <li><a href="../../chapters/functions/declaration.html" class="footer__link">Функции</a></li>
+                        <li><a href="../../chapters/pointers/pointers-basics.html" class="footer__link">Указатели</a></li>
+                        <li><a href="../../chapters/oop/classes.html" class="footer__link">ООП</a></li>
+                        <li><a href="../../chapters/stl/vectors.html" class="footer__link">STL</a></li>
+                    </ul>
+                </div>
+        
+                <div class="footer__col">
+                    <h3 class="footer__title">Автор проекта</h3>
+                    <ul class="footer__list">
+                        <li>Студент: Иванов И.И.</li>
+                        <li>Группа: ПИ-123</li>
+                        <li>ВУЗ: НИУ "МЭИ"</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p class="footer__copyright">2025 C++ Вики</p>
+                <a href="#" class="footer__to-top" id="to-top">Наверх ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../../js/prism.js"></script>
+    <script src="../../js/copy-code.js"></script>
+    <script src="../../js/main.js"></script>
+</body>
+</html>

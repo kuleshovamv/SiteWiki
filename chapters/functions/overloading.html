@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Перегрузка функций в C++ | C++ Вики</title>
+    <meta name="description" content="Подробное руководство по перегрузке функций в языке C++ для начинающих">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/prism.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <a href="../../index.html" class="logo">
+                    <span class="logo__icon">C++</span>
+                    <span class="logo__text">Вики</span>
+                </a>
+                
+                <!-- Навигация -->
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="../../index.html" class="nav__link">Главная</a></li>
+                        <li class="nav__item"><a href="../basics/variables.html" class="nav__link">Основы</a></li>
+                        <li class="nav__item"><a href="declaration.html" class="nav__link">Функции</a></li>
+                        <li class="nav__item"><a href="overloading.html" class="nav__link active">Перегрузка</a></li>
+                        <li class="nav__item"><a href="../pointers/pointers-basics.html" class="nav__link">Указатели</a></li>
+                        <li class="nav__item"><a href="../oop/classes.html" class="nav__link">ООП</a></li>
+                        <li class="nav__item"><a href="../stl/vectors.html" class="nav__link">STL</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Поиск -->
+                <div class="search">
+                    <form action="../../search.html" method="GET" class="search__form">
+                        <input type="text" name="q" placeholder="Поиск по справочнику..." class="search__input">
+                        <button type="submit" class="search__button">
+                            <svg class="search__icon" viewBox="0 0 24 24">
+                                <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Мобильное меню -->
+                <button class="menu-toggle" aria-label="Меню">
+                    <span class="menu-toggle__line"></span>
+                    <span class="menu-toggle__line"></span>
+                    <span class="menu-toggle__line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основное содержимое -->
+    <main class="main">
+        <div class="container">
+            <!-- Хлебные крошки -->
+            <nav class="breadcrumbs">
+                <ul class="breadcrumbs__list">
+                    <li class="breadcrumbs__item"><a href="../../index.html" class="breadcrumbs__link">Главная</a></li>
+                    <li class="breadcrumbs__item"><a href="declaration.html" class="breadcrumbs__link">Функции</a></li>
+                    <li class="breadcrumbs__item">Перегрузка функций</li>
+                </ul>
+            </nav>
+            
+            <!-- Заголовок -->
+            <h1 class="page-title">Перегрузка функций в C++</h1>
+            
+            <!-- Введение -->
+            <section class="intro">
+                <p>Перегрузка функций позволяет создавать несколько функций с одинаковым именем, но разными параметрами. Это мощный инструмент для создания более читаемого и гибкого кода.</p>
+                <p>В этом разделе вы узнаете, как правильно использовать перегрузку функций в C++.</p>
+            </section>
+            
+            <!-- Содержание статьи -->
+            <article class="article">
+                <h2>Основы перегрузки функций</h2>
+                <p>Функции могут быть перегружены, если они отличаются:</p>
+                <ul>
+                    <li>Количеством параметров</li>
+                    <li>Типами параметров</li>
+                    <li>Последовательностью типов параметров</li>
+                </ul>
+                
+                <pre><code class="language-cpp line-numbers" id="code1">// Пример перегруженных функций
+void print(int i) {
+    std::cout << "Целое число: " << i << std::endl;
+}
+
+void print(double d) {
+    std::cout << "Дробное число: " << d << std::endl;
+}
+
+void print(const std::string &s) {
+    std::cout << "Строка: " << s << std::endl;
+}
+
+int main() {
+    print(10);       // Вызов print(int)
+    print(3.14);     // Вызов print(double)
+    print("Hello");  // Вызов print(const std::string&)
+}</code><button class="copy-button" data-target="code1" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <div class="warning">
+                    <h3 class="warning__title">Важно!</h3>
+                    <p>Только возвращаемое значение не является достаточным условием для перегрузки. Функции, отличающиеся только типом возвращаемого значения, не могут быть перегружены.</p>
+                </div>
+                
+                <h2>Разрешение перегрузки</h2>
+                <p>Компилятор выбирает наиболее подходящую версию функции по следующим правилам:</p>
+                <ol>
+                    <li>Точное совпадение типов</li>
+                    <li>Продвижение типов (например, char → int)</li>
+                    <li>Стандартные преобразования (например, int → double)</li>
+                    <li>Пользовательские преобразования</li>
+                </ol>
+                
+                <pre><code class="language-cpp line-numbers" id="code2">void func(int i) {
+    std::cout << "func(int)" << std::endl;
+}
+
+void func(double d) {
+    std::cout << "func(double)" << std::endl;
+}
+
+int main() {
+    func(10);    // func(int) - точное совпадение
+    func(10.0);  // func(double) - точное совпадение
+    func('a');   // func(int) - продвижение char → int
+    func(10.5f); // func(double) - стандартное преобразование float → double
+}</code><button class="copy-button" data-target="code2" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Перегрузка и параметры по умолчанию</h2>
+                <p>Перегрузку можно комбинировать с параметрами по умолчанию, но нужно быть осторожным:</p>
+                
+                <pre><code class="language-cpp line-numbers" id="code3">void drawCircle(int x, int y, int radius = 10) {
+    std::cout << "Рисуем круг с радиусом " << radius << std::endl;
+}
+
+void drawCircle(int x, int y) {
+    std::cout << "Рисуем круг с радиусом по умолчанию" << std::endl;
+}
+
+int main() {
+    drawCircle(100, 100); // Ошибка: неоднозначный вызов
+    drawCircle(100, 100, 20); // OK
+}</code><button class="copy-button" data-target="code3" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <div class="note">
+                    <h3 class="note__title">Рекомендация</h3>
+                    <p>Избегайте ситуаций, когда перегруженные функции могут стать неоднозначными из-за параметров по умолчанию.</p>
+                </div>
+                
+                <h2>Перегрузка и const-параметры</h2>
+                <p>Перегрузка возможна для const и non-const версий функций:</p>
+                
+                <pre><code class="language-cpp line-numbers" id="code4">class MyArray {
+public:
+    int& operator[](int index) { // Для неконстантных объектов
+        return data[index];
+    }
+    
+    const int& operator[](int index) const { // Для константных объектов
+        return data[index];
+    }
+    
+private:
+    int data[10];
+};
+
+int main() {
+    MyArray arr1;
+    const MyArray arr2;
+    
+    arr1[0] = 10;  // Вызов неконстантной версии
+    int x = arr2[0]; // Вызов константной версии
+}</code><button class="copy-button" data-target="code4" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Перегрузка операторов</h2>
+                <p>Перегрузка операторов - частный случай перегрузки функций:</p>
+                
+                <pre><code class="language-cpp line-numbers" id="code5">class Vector {
+public:
+    Vector operator+(const Vector &other) const {
+        return Vector(x + other.x, y + other.y);
+    }
+    
+    Vector operator-() const { // Унарный минус
+        return Vector(-x, -y);
+    }
+    
+    // Дружественная функция для перегрузки оператора <<
+    friend std::ostream& operator<<(std::ostream &os, const Vector &v);
+    
+private:
+    double x, y;
+};
+
+std::ostream& operator<<(std::ostream &os, const Vector &v) {
+    os << "(" << v.x << ", " << v.y << ")";
+    return os;
+}</code><button class="copy-button" data-target="code5" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <div class="tip">
+                    <h3 class="tip__title">Совет</h3>
+                    <p>При перегрузке операторов сохраняйте их естественную семантику. Например, оператор + должен выполнять сложение, а не вычитание.</p>
+                </div>
+                
+                <h2>Практические примеры перегрузки</h2>
+                
+                <h3>1. Перегрузка функций для работы с разными типами данных</h3>
+                <pre><code class="language-cpp line-numbers" id="code6">int max(int a, int b) {
+    return (a > b) ? a : b;
+}
+
+double max(double a, double b) {
+    return (a > b) ? a : b;
+}
+
+std::string max(const std::string &a, const std::string &b) {
+    return (a > b) ? a : b;
+}</code><button class="copy-button" data-target="code6" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h3>2. Перегрузка конструкторов класса</h3>
+                <pre><code class="language-cpp line-numbers" id="code7">class Rectangle {
+public:
+    Rectangle() : width(0), height(0) {} // Конструктор по умолчанию
+    
+    Rectangle(int size) : width(size), height(size) {} // Квадрат
+    
+    Rectangle(int w, int h) : width(w), height(h) {} // Прямоугольник
+    
+private:
+    int width, height;
+};</code><button class="copy-button" data-target="code7" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h3>3. Перегрузка функций для разных сценариев использования</h3>
+                <pre><code class="language-cpp line-numbers" id="code8">// Инициализация массива значением
+void initArray(int *arr, int size, int value) {
+    for (int i = 0; i < size; i++) {
+        arr[i] = value;
+    }
+}
+
+// Инициализация массива случайными числами
+void initArray(int *arr, int size, int min, int max) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dist(min, max);
+    
+    for (int i = 0; i < size; i++) {
+        arr[i] = dist(gen);
+    }
+}</code><button class="copy-button" data-target="code8" aria-label="Копировать код">Копировать код</button></pre>
+            </article>
+            
+            <!-- Навигация между статьями -->
+            <div class="article-navigation">
+                <a href="recursion.html" class="button">Следующая статья: Рекурсия →</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <div class="footer__col">
+                    <h3 class="footer__title">C++ Вики</h3>
+                    <p class="footer__text">Справочник по языку программирования C++ для начинающих.</p>
+                </div>
+                
+                <div class="footer__col">
+                    <h3 class="footer__title">Разделы</h3>
+                    <ul class="footer__list">
+                        <li><a href="../../chapters/basics/variables.html" class="footer__link">Основы</a></li>
+                        <li><a href="../../chapters/functions/declaration.html" class="footer__link">Функции</a></li>
+                        <li><a href="../../chapters/pointers/pointers-basics.html" class="footer__link">Указатели</a></li>
+                        <li><a href="../../chapters/oop/classes.html" class="footer__link">ООП</a></li>
+                        <li><a href="../../chapters/stl/vectors.html" class="footer__link">STL</a></li>
+                    </ul>
+                </div>
+        
+                <div class="footer__col">
+                    <h3 class="footer__title">Автор проекта</h3>
+                    <ul class="footer__list">
+                        <li>Студент: Иванов И.И.</li>
+                        <li>Группа: ПИ-123</li>
+                        <li>ВУЗ: НИУ "МЭИ"</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p class="footer__copyright">2025 C++ Вики</p>
+                <a href="#" class="footer__to-top" id="to-top">Наверх ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../../js/prism.js"></script>
+    <script src="../../js/copy-code.js"></script>
+    <script src="../../js/main.js"></script>
+</body>
+</html>
