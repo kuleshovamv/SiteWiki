@@ -100,10 +100,13 @@ h2 {
     font-size: var(--h2-size);
     border-bottom: 2px solid var(--primary-light);
     padding-bottom: var(--space-sm);
+    margin-top: var(--space-xxl);
+    margin-bottom: var(--space-xl);
 }
 
 h3 {
     font-size: var(--h3-size);
+    margin-top: var(--space-lg);
 }
 
 h4 {
@@ -150,7 +153,7 @@ blockquote {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 var(--space-md);
+    padding: 0 var(--space-lg);
 }
 
 /* Кнопки */
@@ -166,6 +169,7 @@ blockquote {
     cursor: pointer;
     transition: all var(--transition-fast);
     text-align: center;
+    margin: var(--space-xs) var(--space-sm);
 }
 
 .button:hover {
@@ -229,6 +233,7 @@ blockquote {
 .card__footer {
     padding: var(--space-md);
     border-top: 1px solid var(--background-dark);
+    text-align: center;
 }
 
 .card__link {
@@ -424,6 +429,7 @@ blockquote {
 
 .sections__title {
     margin-top: var(--space-xxl);
+    margin-bottom: var(--space-xl)
 }
 
 /* Хлебные крошки */
@@ -577,6 +583,10 @@ blockquote {
         width: 100%;
         margin: var(--space-md) 0 0;
     }
+
+    .container {
+        padding: 0 var(--space-md);
+    }
 }
 
 @media (max-width: 768px) {
@@ -584,6 +594,25 @@ blockquote {
         --base-font-size: 15px;
         --h1-size: 1.75rem;
         --h2-size: 1.5rem;
+    }
+
+    .container {
+        padding: 0 var(--space-md);
+    }
+    
+    h2 {
+        margin-top: var(--space-xl);
+        margin-bottom: var(--space-lg);
+    }
+    
+    h3 {
+        margin-top: var(--space-lg);
+        margin-bottom: var(--space-md);
+    }
+    
+    .sections__title {
+        margin-top: var(--space-xl);
+        margin-bottom: var(--space-lg);
     }
     
     .nav {
@@ -632,6 +661,10 @@ blockquote {
         --space-md: 0.75rem;
         --space-lg: 1rem;
         --space-xl: 1.5rem;
+    }
+
+    .container {
+        padding: 0 var(--space-sm);
     }
     
     .cards {
