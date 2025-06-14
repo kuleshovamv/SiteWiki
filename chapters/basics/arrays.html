@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Массивы в C++ | C++ Вики</title>
+    <meta name="description" content="Подробное руководство по массивам в языке C++ для начинающих">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/prism.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <a href="../../index.html" class="logo">
+                    <span class="logo__icon">C++</span>
+                    <span class="logo__text">Вики</span>
+                </a>
+                
+                <!-- Навигация -->
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="../../index.html" class="nav__link">Главная</a></li>
+                        <li class="nav__item"><a href="variables.html" class="nav__link">Основы</a></li>
+                        <li class="nav__item"><a href="../functions/declaration.html" class="nav__link">Функции</a></li>
+                        <li class="nav__item"><a href="../pointers/pointers-basics.html" class="nav__link">Указатели</a></li>
+                        <li class="nav__item"><a href="../oop/classes.html" class="nav__link">ООП</a></li>
+                        <li class="nav__item"><a href="../stl/vectors.html" class="nav__link">STL</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Поиск -->
+                <div class="search">
+                    <form action="../../search.html" method="GET" class="search__form">
+                        <input type="text" name="q" placeholder="Поиск по справочнику..." class="search__input">
+                        <button type="submit" class="search__button">
+                            <svg class="search__icon" viewBox="0 0 24 24">
+                                <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Мобильное меню -->
+                <button class="menu-toggle" aria-label="Меню">
+                    <span class="menu-toggle__line"></span>
+                    <span class="menu-toggle__line"></span>
+                    <span class="menu-toggle__line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основное содержимое -->
+    <main class="main">
+        <div class="container">
+            <!-- Хлебные крошки -->
+            <nav class="breadcrumbs">
+                <ul class="breadcrumbs__list">
+                    <li class="breadcrumbs__item"><a href="../../index.html" class="breadcrumbs__link">Главная</a></li>
+                    <li class="breadcrumbs__item"><a href="variables.html" class="breadcrumbs__link">Основы</a></li>
+                    <li class="breadcrumbs__item">Массивы</li>
+                </ul>
+            </nav>
+            
+            <!-- Заголовок -->
+            <h1 class="page-title">Массивы в C++</h1>
+            
+            <!-- Введение -->
+            <section class="intro">
+                <p>Массивы позволяют хранить набор значений одного типа в непрерывной области памяти. В C++ существуют обычные массивы (C-style arrays) и более современные контейнеры из STL (например, vector).</p>
+            </section>
+            
+            <!-- Содержание статьи -->
+            <article class="article">
+                <h2>Одномерные массивы</h2>
+                <p>Объявление и инициализация одномерного массива:</p>
+                
+                <pre><code class="language-cpp line-numbers">// Объявление массива из 5 целых чисел
+int numbers[5];
+
+// Инициализация при объявлении
+int primes[] = {2, 3, 5, 7, 11};
+
+// Доступ к элементам массива
+primes[0] = 1;  // Изменяем первый элемент
+int x = primes[2];  // x = 5</code></pre>
+                
+                <h3>Пример работы с массивом</h3>
+                <pre><code class="language-cpp line-numbers">#include &lt;iostream&gt;
+
+int main() {
+    const int SIZE = 5;
+    double temperatures[SIZE] = {20.5, 22.0, 18.5, 21.3, 19.8};
+    
+    // Вывод всех элементов массива
+    for (int i = 0; i < SIZE; i++) {
+        std::cout << "Температура в день " << i+1 << ": " << temperatures[i] << std::endl;
+    }
+    
+    // Вычисление средней температуры
+    double sum = 0;
+    for (int i = 0; i < SIZE; i++) {
+        sum += temperatures[i];
+    }
+    double average = sum / SIZE;
+    std::cout << "Средняя температура: " << average << std::endl;
+    
+    return 0;
+}</code></pre>
+                
+                <h2>Многомерные массивы</h2>
+                <p>C++ поддерживает массивы с несколькими измерениями:</p>
+                
+                <pre><code class="language-cpp line-numbers">// Двумерный массив (матрица)
+int matrix[3][3] = {
+    {1, 2, 3},
+    {4, 5, 6},
+    {7, 8, 9}
+};
+
+// Трехмерный массив
+int cube[2][2][2] = {
+    {
+        {1, 2},
+        {3, 4}
+    },
+    {
+        {5, 6},
+        {7, 8}
+    }
+};</code></pre>
+                
+                <h3>Пример работы с матрицей</h3>
+                <pre><code class="language-cpp line-numbers">#include &lt;iostream&gt;
+
+int main() {
+    const int ROWS = 3, COLS = 3;
+    int matrix[ROWS][COLS] = {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    };
+    
+    // Вывод матрицы
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            std::cout << matrix[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+    
+    // Сумма элементов главной диагонали
+    int diagonalSum = 0;
+    for (int i = 0; i < ROWS; i++) {
+        diagonalSum += matrix[i][i];
+    }
+    std::cout << "Сумма диагонали: " << diagonalSum << std::endl;
+    
+    return 0;
+}</code></pre>
+                
+                <h2>Динамические массивы</h2>
+                <p>Для создания массивов переменного размера используются указатели и операторы <code>new</code>/<code>delete</code>:</p>
+                
+                <pre><code class="language-cpp line-numbers">#include &lt;iostream&gt;
+
+int main() {
+    int size;
+    std::cout << "Введите размер массива: ";
+    std::cin >> size;
+    
+    // Создание динамического массива
+    int* dynamicArray = new int[size];
+    
+    // Заполнение массива
+    for (int i = 0; i < size; i++) {
+        dynamicArray[i] = i * 10;
+    }
+    
+    // Вывод массива
+    for (int i = 0; i < size; i++) {
+        std::cout << dynamicArray[i] << " ";
+    }
+    std::cout << std::endl;
+    
+    // Освобождение памяти
+    delete[] dynamicArray;
+    
+    return 0;
+}</code></pre>
+                
+                <div class="tip">
+                    <h3 class="tip__title">Совет по использованию массивов</h3>
+                    <p>В современном C++ предпочтительнее использовать контейнеры STL (например, <code>std::vector</code> или <code>std::array</code>), так как они безопаснее и предоставляют больше возможностей. C-style массивы стоит использовать только в особых случаях.</p>
+                </div>
+                
+                <h2>Массивы и указатели</h2>
+                <p>Имя массива является указателем на его первый элемент:</p>
+                
+                <pre><code class="language-cpp line-numbers">int arr[5] = {10, 20, 30, 40, 50};
+int* ptr = arr;  // ptr указывает на первый элемент массива
+
+// Доступ через указатель
+std::cout << *ptr << std::endl;  // 10
+std::cout << *(ptr + 2) << std::endl;  // 30
+
+// Арифметика указателей
+ptr++;  // теперь указывает на второй элемент
+std::cout << *ptr << std::endl;  // 20</code></pre>
+                
+                <h3>Передача массива в функцию</h3>
+                <pre><code class="language-cpp line-numbers">#include &lt;iostream&gt;
+
+// Функция принимает массив и его размер
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        std::cout << arr[i] << " ";
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    int numbers[] = {1, 2, 3, 4, 5};
+    printArray(numbers, 5);
+    return 0;
+}</code></pre>
+            </article>
+            
+            <!-- Навигация между статьями -->
+            <div class="article-navigation">
+                <a href="conditions.html" class="button">← Предыдущая статья: Конструкции</a>
+                <a href="../../index.html" class="button">На главную</a>
+                <a href="../functions/declaration.html" class="button">Следующая статья: Функции →</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <div class="footer__col">
+                    <h3 class="footer__title">C++ Вики</h3>
+                    <p class="footer__text">Справочник по языку программирования C++ для начинающих.</p>
+                </div>
+                
+                <div class="footer__col">
+                    <h3 class="footer__title">Разделы</h3>
+                    <ul class="footer__list">
+                        <li><a href="../../chapters/basics/variables.html" class="footer__link">Основы</a></li>
+                        <li><a href="../../chapters/functions/declaration.html" class="footer__link">Функции</a></li>
+                        <li><a href="../../chapters/pointers/pointers-basics.html" class="footer__link">Указатели</a></li>
+                        <li><a href="../../chapters/oop/classes.html" class="footer__link">ООП</a></li>
+                        <li><a href="../../chapters/stl/vectors.html" class="footer__link">STL</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer__col">
+                    <h3 class="footer__title">Автор проекта</h3>
+                    <ul class="footer__list">
+                        <li>Студент: Иванов И.И.</li>
+                        <li>Группа: ПИ-123</li>
+                        <li>ВУЗ: НИУ "МЭИ"</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p class="footer__copyright">2025 C++ Вики</p>
+                <a href="#" class="footer__to-top" id="to-top">Наверх ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../../js/prism.js"></script>
+    <script src="../../js/copy-code.js"></script>
+    <script src="../../js/main.js"></script>
+</body>
+</html>

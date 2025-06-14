@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Операторы в C++ | C++ Вики</title>
+    <meta name="description" content="Подробное руководство по операторам в языке C++ для начинающих">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/prism.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <a href="../../index.html" class="logo">
+                    <span class="logo__icon">C++</span>
+                    <span class="logo__text">Вики</span>
+                </a>
+                
+                <!-- Навигация -->
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="../../index.html" class="nav__link">Главная</a></li>
+                        <li class="nav__item"><a href="variables.html" class="nav__link">Основы</a></li>
+                        <li class="nav__item"><a href="../functions/declaration.html" class="nav__link">Функции</a></li>
+                        <li class="nav__item"><a href="../pointers/pointers-basics.html" class="nav__link">Указатели</a></li>
+                        <li class="nav__item"><a href="../oop/classes.html" class="nav__link">ООП</a></li>
+                        <li class="nav__item"><a href="../stl/vectors.html" class="nav__link">STL</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Поиск -->
+                <div class="search">
+                    <form action="../../search.html" method="GET" class="search__form">
+                        <input type="text" name="q" placeholder="Поиск по справочнику..." class="search__input">
+                        <button type="submit" class="search__button">
+                            <svg class="search__icon" viewBox="0 0 24 24">
+                                <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Мобильное меню -->
+                <button class="menu-toggle" aria-label="Меню">
+                    <span class="menu-toggle__line"></span>
+                    <span class="menu-toggle__line"></span>
+                    <span class="menu-toggle__line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основное содержимое -->
+    <main class="main">
+        <div class="container">
+            <!-- Хлебные крошки -->
+            <nav class="breadcrumbs">
+                <ul class="breadcrumbs__list">
+                    <li class="breadcrumbs__item"><a href="../../index.html" class="breadcrumbs__link">Главная</a></li>
+                    <li class="breadcrumbs__item"><a href="variables.html" class="breadcrumbs__link">Основы</a></li>
+                    <li class="breadcrumbs__item">Операторы</li>
+                </ul>
+            </nav>
+            
+            <!-- Заголовок -->
+            <h1 class="page-title">Операторы в C++</h1>
+            
+            <!-- Введение -->
+            <section class="intro">
+                <p>Операторы в C++ - это символы, которые выполняют операции над переменными и значениями. Они позволяют производить вычисления, сравнивать значения, управлять потоком выполнения программы и многое другое.</p>
+            </section>
+            
+            <!-- Содержание статьи -->
+            <article class="article">
+                <h2>Арифметические операторы</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Оператор</th>
+                                <th>Описание</th>
+                                <th>Пример</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>+</code></td>
+                                <td>Сложение</td>
+                                <td><code>a + b</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>-</code></td>
+                                <td>Вычитание</td>
+                                <td><code>a - b</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>*</code></td>
+                                <td>Умножение</td>
+                                <td><code>a * b</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>/</code></td>
+                                <td>Деление</td>
+                                <td><code>a / b</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>%</code></td>
+                                <td>Остаток от деления</td>
+                                <td><code>a % b</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>++</code></td>
+                                <td>Инкремент</td>
+                                <td><code>a++</code> или <code>++a</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>--</code></td>
+                                <td>Декремент</td>
+                                <td><code>a--</code> или <code>--a</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <pre><code class="language-cpp line-numbers">int a = 10, b = 3;
+int sum = a + b;      // 13
+int diff = a - b;     // 7
+int product = a * b;  // 30
+int quotient = a / b; // 3 (целочисленное деление)
+int remainder = a % b;// 1
+a++;                  // a становится 11
+--b;                  // b становится 2</code></pre>
+
+                <h2>Операторы присваивания</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Оператор</th>
+                                <th>Пример</th>
+                                <th>Эквивалент</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>=</code></td>
+                                <td><code>a = b</code></td>
+                                <td><code>a = b</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>+=</code></td>
+                                <td><code>a += b</code></td>
+                                <td><code>a = a + b</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>-=</code></td>
+                                <td><code>a -= b</code></td>
+                                <td><code>a = a - b</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>*=</code></td>
+                                <td><code>a *= b</code></td>
+                                <td><code>a = a * b</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>/=</code></td>
+                                <td><code>a /= b</code></td>
+                                <td><code>a = a / b</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>%=</code></td>
+                                <td><code>a %= b</code></td>
+                                <td><code>a = a % b</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h2>Операторы сравнения</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Оператор</th>
+                                <th>Описание</th>
+                                <th>Пример</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>==</code></td>
+                                <td>Равно</td>
+                                <td><code>a == b</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>!=</code></td>
+                                <td>Не равно</td>
+                                <td><code>a != b</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>&gt;</code></td>
+                                <td>Больше</td>
+                                <td><code>a > b</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>&lt;</code></td>
+                                <td>Меньше</td>
+                                <td><code>a < b</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>&gt;=</code></td>
+                                <td>Больше или равно</td>
+                                <td><code>a >= b</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>&lt;=</code></td>
+                                <td>Меньше или равно</td>
+                                <td><code>a <= b</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h2>Логические операторы</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Оператор</th>
+                                <th>Описание</th>
+                                <th>Пример</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>&&</code></td>
+                                <td>Логическое И</td>
+                                <td><code>a && b</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>||</code></td>
+                                <td>Логическое ИЛИ</td>
+                                <td><code>a || b</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>!</code></td>
+                                <td>Логическое НЕ</td>
+                                <td><code>!a</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <pre><code class="language-cpp line-numbers">bool isTrue = true, isFalse = false;
+bool result1 = isTrue && isFalse; // false
+bool result2 = isTrue || isFalse; // true
+bool result3 = !isTrue;           // false</code></pre>
+
+                <h2>Битовые операторы</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Оператор</th>
+                                <th>Описание</th>
+                                <th>Пример</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>&</code></td>
+                                <td>Битовое И</td>
+                                <td><code>a & b</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>|</code></td>
+                                <td>Битовое ИЛИ</td>
+                                <td><code>a | b</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>^</code></td>
+                                <td>Битовое исключающее ИЛИ</td>
+                                <td><code>a ^ b</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>~</code></td>
+                                <td>Битовое НЕ</td>
+                                <td><code>~a</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>&lt;&lt;</code></td>
+                                <td>Сдвиг влево</td>
+                                <td><code>a << b</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>&gt;&gt;</code></td>
+                                <td>Сдвиг вправо</td>
+                                <td><code>a >> b</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <pre><code class="language-cpp line-numbers">unsigned int a = 5;    // 0101
+unsigned int b = 3;    // 0011
+unsigned int r1 = a & b; // 0001 (1)
+unsigned int r2 = a | b; // 0111 (7)
+unsigned int r3 = a ^ b; // 0110 (6)
+unsigned int r4 = ~a;    // ...11111010 (зависит от размера int)
+unsigned int r5 = a << 1; // 1010 (10)
+unsigned int r6 = a >> 1; // 0010 (2)</code></pre>
+
+                <h2>Условный (тернарный) оператор</h2>
+                <p>Синтаксис: <code>условие ? выражение1 : выражение2</code></p>
+                
+                <pre><code class="language-cpp line-numbers">int a = 10, b = 20;
+int max = (a > b) ? a : b; // max будет равно 20</code></pre>
+
+                <div class="tip">
+                    <h3 class="tip__title">Совет по использованию операторов</h3>
+                    <p>Используйте скобки для явного указания порядка выполнения операций, даже если он соответствует стандартному приоритету. Это сделает код более читаемым и поможет избежать ошибок.</p>
+                </div>
+            </article>
+            
+            <!-- Навигация между статьями -->
+            <div class="article-navigation">
+                <a href="data-types.html" class="button">← Предыдущая статья: Типы данных</a>
+                <a href="loops.html" class="button">Следующая статья: Циклы →</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <div class="footer__col">
+                    <h3 class="footer__title">C++ Вики</h3>
+                    <p class="footer__text">Справочник по языку программирования C++ для начинающих.</p>
+                </div>
+                
+                <div class="footer__col">
+                    <h3 class="footer__title">Разделы</h3>
+                    <ul class="footer__list">
+                        <li><a href="../../chapters/basics/variables.html" class="footer__link">Основы</a></li>
+                        <li><a href="../../chapters/functions/declaration.html" class="footer__link">Функции</a></li>
+                        <li><a href="../../chapters/pointers/pointers-basics.html" class="footer__link">Указатели</a></li>
+                        <li><a href="../../chapters/oop/classes.html" class="footer__link">ООП</a></li>
+                        <li><a href="../../chapters/stl/vectors.html" class="footer__link">STL</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer__col">
+                    <h3 class="footer__title">Автор проекта</h3>
+                    <ul class="footer__list">
+                        <li>Студент: Иванов И.И.</li>
+                        <li>Группа: ПИ-123</li>
+                        <li>ВУЗ: НИУ "МЭИ"</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p class="footer__copyright">2025 C++ Вики</p>
+                <a href="#" class="footer__to-top" id="to-top">Наверх ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../../js/prism.js"></script>
+    <script src="../../js/copy-code.js"></script>
+    <script src="../../js/main.js"></script>
+</body>
+</html>

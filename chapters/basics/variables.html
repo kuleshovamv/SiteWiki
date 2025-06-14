@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Переменные в C++ | C++ Вики</title>
+    <meta name="description" content="Подробное руководство по работе с переменными в языке C++ для начинающих">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/prism.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <a href="../../index.html" class="logo">
+                    <span class="logo__icon">C++</span>
+                    <span class="logo__text">Вики</span>
+                </a>
+                
+                <!-- Навигация -->
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="../../index.html" class="nav__link">Главная</a></li>
+                        <li class="nav__item"><a href="variables.html" class="nav__link active">Основы</a></li>
+                        <li class="nav__item"><a href="../functions/declaration.html" class="nav__link">Функции</a></li>
+                        <li class="nav__item"><a href="../pointers/pointers-basics.html" class="nav__link">Указатели</a></li>
+                        <li class="nav__item"><a href="../oop/classes.html" class="nav__link">ООП</a></li>
+                        <li class="nav__item"><a href="../stl/vectors.html" class="nav__link">STL</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Поиск -->
+                <div class="search">
+                    <form action="../../search.html" method="GET" class="search__form">
+                        <input type="text" name="q" placeholder="Поиск по справочнику..." class="search__input">
+                        <button type="submit" class="search__button">
+                            <svg class="search__icon" viewBox="0 0 24 24">
+                                <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Мобильное меню -->
+                <button class="menu-toggle" aria-label="Меню">
+                    <span class="menu-toggle__line"></span>
+                    <span class="menu-toggle__line"></span>
+                    <span class="menu-toggle__line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основное содержимое -->
+    <main class="main">
+        <div class="container">
+            <!-- Хлебные крошки -->
+            <nav class="breadcrumbs">
+                <ul class="breadcrumbs__list">
+                    <li class="breadcrumbs__item"><a href="../../index.html" class="breadcrumbs__link">Главная</a></li>
+                    <li class="breadcrumbs__item"><a href="variables.html" class="breadcrumbs__link">Основы</a></li>
+                    <li class="breadcrumbs__item">Переменные</li>
+                </ul>
+            </nav>
+            
+            <!-- Заголовок -->
+            <h1 class="page-title">Переменные в C++</h1>
+            
+            <!-- Введение -->
+            <section class="intro">
+                <p>Переменные - это фундаментальная концепция в программировании на C++. Они представляют собой именованные области памяти, которые хранят данные определенного типа.</p>
+                <p>В этом разделе вы узнаете, как объявлять, инициализировать и использовать переменные в C++.</p>
+            </section>
+            
+            <!-- Содержание статьи -->
+            <article class="article">
+                <h2>Объявление переменных</h2>
+                <p>В C++ переменные объявляются с указанием типа и имени:</p>
+                
+                <pre><code class="language-cpp line-numbers">// Объявление переменной
+int age;
+double price;
+char letter;</code></pre>
+                
+                <p>Где:</p>
+                <ul>
+                    <li><code>int</code> - целочисленный тип</li>
+                    <li><code>double</code> - тип с плавающей точкой двойной точности</li>
+                    <li><code>char</code> - символьный тип</li>
+                </ul>
+                
+                <h2>Инициализация переменных</h2>
+                <p>Переменные можно инициализировать при объявлении:</p>
+                
+                <pre><code class="language-cpp line-numbers">// Инициализация при объявлении
+int count = 10;
+double temperature = 36.6;
+char grade = 'A';</code></pre>
+                
+                <p>В C++11 появилась универсальная инициализация с фигурными скобками:</p>
+                
+                <pre><code class="language-cpp line-numbers">// Универсальная инициализация (C++11)
+int width{5};
+double height{1.75};
+std::string name{"Alice"};</code></pre>
+                
+                <h2>Основные типы данных</h2>
+                <p>C++ предоставляет несколько основных типов данных:</p>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Тип</th>
+                                <th>Описание</th>
+                                <th>Размер (байт)</th>
+                                <th>Пример</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>int</code></td>
+                                <td>Целое число</td>
+                                <td>4</td>
+                                <td><code>42</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>float</code></td>
+                                <td>Число с плавающей точкой</td>
+                                <td>4</td>
+                                <td><code>3.14f</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>double</code></td>
+                                <td>Число с плавающей точкой (двойная точность)</td>
+                                <td>8</td>
+                                <td><code>2.71828</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>char</code></td>
+                                <td>Символ</td>
+                                <td>1</td>
+                                <td><code>'A'</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>bool</code></td>
+                                <td>Логический тип</td>
+                                <td>1</td>
+                                <td><code>true</code>, <code>false</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h2>Область видимости переменных</h2>
+                <p>Область видимости определяет, где переменная может быть использована:</p>
+                
+                <pre><code class="language-cpp line-numbers">#include &lt;iostream&gt;
+
+int globalVar = 10;  // Глобальная переменная
+
+int main() {
+    int localVar = 5;  // Локальная переменная
+    
+    {
+        int blockVar = 3;  // Переменная блока
+        std::cout << blockVar << std::endl;
+    }
+    
+    // Ошибка: blockVar не видна здесь
+    // std::cout << blockVar << std::endl;
+    
+    std::cout << globalVar << std::endl;
+    std::cout << localVar << std::endl;
+    
+    return 0;
+}</code></pre>
+                
+                <h2>Константные переменные</h2>
+                <p>Для создания неизменяемых переменных используют модификатор <code>const</code>:</p>
+                
+                <pre><code class="language-cpp line-numbers">const double PI = 3.14159;
+const int MAX_USERS = 100;
+
+// Ошибка: нельзя изменить константу
+// PI = 3.14;</code></pre>
+                
+                <h2>Автоматическое определение типа (C++11)</h2>
+                <p>С C++11 можно использовать ключевое слово <code>auto</code>:</p>
+                
+                <pre><code class="language-cpp line-numbers">auto number = 42;      // int
+auto price = 19.99;    // double
+auto letter = 'A';     // char
+auto isActive = true;  // bool</code></pre>
+                
+                <h2>Правила именования переменных</h2>
+                <p>Рекомендации по именованию переменных:</p>
+                <ul>
+                    <li>Имена должны быть описательными (<code>userAge</code> лучше чем <code>ua</code>)</li>
+                    <li>Можно использовать camelCase или snake_case</li>
+                    <li>Нельзя начинать с цифры</li>
+                    <li>Избегайте зарезервированных слов (<code>int</code>, <code>return</code> и т.д.)</li>
+                    <li>Константы обычно именуются в UPPER_CASE</li>
+                </ul>
+                
+                <div class="tip">
+                    <h3 class="tip__title">Совет по использованию переменных</h3>
+                    <p>Всегда инициализируйте переменные при объявлении. Неинициализированные переменные содержат "мусор" и могут привести к неожиданному поведению программы.</p>
+                </div>
+            </article>
+            
+            <!-- Навигация между статьями -->
+            <div class="article-navigation">
+                <a href="data-types.html" class="button">Следующая статья: Типы данных →</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <div class="footer__col">
+                    <h3 class="footer__title">C++ Вики</h3>
+                    <p class="footer__text">Справочник по языку программирования C++ для начинающих.</p>
+                </div>
+                
+                <div class="footer__col">
+                    <h3 class="footer__title">Разделы</h3>
+                    <ul class="footer__list">
+                        <li><a href="../../chapters/basics/variables.html" class="footer__link">Основы</a></li>
+                        <li><a href="../../chapters/functions/declaration.html" class="footer__link">Функции</a></li>
+                        <li><a href="../../chapters/pointers/pointers-basics.html" class="footer__link">Указатели</a></li>
+                        <li><a href="../../chapters/oop/classes.html" class="footer__link">ООП</a></li>
+                        <li><a href="../../chapters/stl/vectors.html" class="footer__link">STL</a></li>
+                    </ul>
+                </div>
+        
+                <div class="footer__col">
+                    <h3 class="footer__title">Автор проекта</h3>
+                    <ul class="footer__list">
+                        <li>Студент: Иванов И.И.</li>
+                        <li>Группа: ПИ-123</li>
+                        <li>ВУЗ: НИУ "МЭИ"</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p class="footer__copyright">2025 C++ Вики</p>
+                <a href="#" class="footer__to-top" id="to-top">Наверх ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../../js/prism.js"></script>
+    <script src="../../js/copy-code.js"></script>
+    <script src="../../js/main.js"></script>
+</body>
+</html>

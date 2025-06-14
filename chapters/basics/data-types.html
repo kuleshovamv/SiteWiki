@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Типы данных в C++ | C++ Вики</title>
+    <meta name="description" content="Подробное руководство по типам данных в языке C++ для начинающих">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/prism.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <a href="../../index.html" class="logo">
+                    <span class="logo__icon">C++</span>
+                    <span class="logo__text">Вики</span>
+                </a>
+                
+                <!-- Навигация -->
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="../../index.html" class="nav__link">Главная</a></li>
+                        <li class="nav__item"><a href="variables.html" class="nav__link">Основы</a></li>
+                        <li class="nav__item"><a href="../functions/declaration.html" class="nav__link">Функции</a></li>
+                        <li class="nav__item"><a href="../pointers/pointers-basics.html" class="nav__link">Указатели</a></li>
+                        <li class="nav__item"><a href="../oop/classes.html" class="nav__link">ООП</a></li>
+                        <li class="nav__item"><a href="../stl/vectors.html" class="nav__link">STL</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Поиск -->
+                <div class="search">
+                    <form action="../../search.html" method="GET" class="search__form">
+                        <input type="text" name="q" placeholder="Поиск по справочнику..." class="search__input">
+                        <button type="submit" class="search__button">
+                            <svg class="search__icon" viewBox="0 0 24 24">
+                                <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Мобильное меню -->
+                <button class="menu-toggle" aria-label="Меню">
+                    <span class="menu-toggle__line"></span>
+                    <span class="menu-toggle__line"></span>
+                    <span class="menu-toggle__line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основное содержимое -->
+    <main class="main">
+        <div class="container">
+            <!-- Хлебные крошки -->
+            <nav class="breadcrumbs">
+                <ul class="breadcrumbs__list">
+                    <li class="breadcrumbs__item"><a href="../../index.html" class="breadcrumbs__link">Главная</a></li>
+                    <li class="breadcrumbs__item"><a href="variables.html" class="breadcrumbs__link">Основы</a></li>
+                    <li class="breadcrumbs__item">Типы данных</li>
+                </ul>
+            </nav>
+            
+            <!-- Заголовок -->
+            <h1 class="page-title">Типы данных в C++</h1>
+            
+            <!-- Введение -->
+            <section class="intro">
+                <p>Типы данных определяют, какие значения может хранить переменная и какие операции можно с ней выполнять. В C++ существует богатая система типов, которая позволяет точно контролировать использование памяти и поведение программы.</p>
+            </section>
+            
+            <!-- Содержание статьи -->
+            <article class="article">
+                <h2>Основные (встроенные) типы данных</h2>
+                <p>C++ предоставляет набор фундаментальных типов данных:</p>
+                
+                <h3>Целочисленные типы</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Тип</th>
+                                <th>Размер (байт)</th>
+                                <th>Диапазон</th>
+                                <th>Пример</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>int</code></td>
+                                <td>4</td>
+                                <td>-2 147 483 648 до 2 147 483 647</td>
+                                <td><code>42</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>short</code></td>
+                                <td>2</td>
+                                <td>-32 768 до 32 767</td>
+                                <td><code>30000</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>long</code></td>
+                                <td>4 или 8</td>
+                                <td>Зависит от системы</td>
+                                <td><code>100000L</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>long long</code></td>
+                                <td>8</td>
+                                <td>-9 223 372 036 854 775 808 до 9 223 372 036 854 775 807</td>
+                                <td><code>1'000'000'000'000LL</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>unsigned int</code></td>
+                                <td>4</td>
+                                <td>0 до 4 294 967 295</td>
+                                <td><code>4000000000U</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h3>Типы с плавающей точкой</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Тип</th>
+                                <th>Размер (байт)</th>
+                                <th>Точность</th>
+                                <th>Пример</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>float</code></td>
+                                <td>4</td>
+                                <td>7 значащих цифр</td>
+                                <td><code>3.14f</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>double</code></td>
+                                <td>8</td>
+                                <td>15 значащих цифр</td>
+                                <td><code>2.71828</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>long double</code></td>
+                                <td>8, 12 или 16</td>
+                                <td>Зависит от системы</td>
+                                <td><code>3.141592653589793L</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h3>Другие основные типы</h3>
+                <pre><code class="language-cpp line-numbers">bool isActive = true;  // Логический тип (true/false)
+char symbol = 'A';     // Символьный тип
+wchar_t wideChar = L'Я'; // Широкий символ
+char16_t utf16Char = u'字'; // UTF-16 символ
+char32_t utf32Char = U'🍕'; // UTF-32 символ</code></pre>
+                
+                <h2>Модификаторы типов</h2>
+                <p>В C++ можно изменять свойства базовых типов с помощью модификаторов:</p>
+                
+                <pre><code class="language-cpp line-numbers">// Модификаторы знака
+signed int a = -10;    // Знаковое целое (по умолчанию)
+unsigned int b = 10;   // Беззнаковое целое
+
+// Модификаторы размера
+short int c = 100;     // Короткое целое
+long int d = 100000;   // Длинное целое
+long long int e = 1'000'000'000'000; // Очень длинное целое</code></pre>
+                
+                <h2>Размеры типов и оператор sizeof</h2>
+                <p>Размеры типов могут отличаться в зависимости от системы и компилятора. Узнать размер можно с помощью оператора <code>sizeof</code>:</p>
+                
+                <pre><code class="language-cpp line-numbers">#include &lt;iostream&gt;
+
+int main() {
+    std::cout << "Размеры типов на этой системе:" << std::endl;
+    std::cout << "bool: " << sizeof(bool) << " байт" << std::endl;
+    std::cout << "char: " << sizeof(char) << " байт" << std::endl;
+    std::cout << "int: " << sizeof(int) << " байт" << std::endl;
+    std::cout << "double: " << sizeof(double) << " байт" << std::endl;
+    std::cout << "long long: " << sizeof(long long) << " байт" << std::endl;
+    
+    return 0;
+}</code></pre>
+                
+                <h2>Псевдонимы типов (typedef и using)</h2>
+                <p>В C++ можно создавать синонимы для типов:</p>
+                
+                <pre><code class="language-cpp line-numbers">// Старый стиль (C)
+typedef unsigned long ulong;
+
+// Новый стиль (C++11)
+using byte = unsigned char;
+using pInt = int*;
+
+// Использование
+ulong bigNumber = 1'000'000'000UL;
+byte data = 0xFF;
+pInt ptr = nullptr;</code></pre>
+                
+                <h2>Автоматическое определение типа (auto)</h2>
+                <p>С C++11 можно использовать ключевое слово <code>auto</code> для автоматического определения типа:</p>
+                
+                <pre><code class="language-cpp line-numbers">auto number = 42;          // int
+auto price = 19.99;        // double
+auto name = "Alice";       // const char*
+auto isActive = true;      // bool
+auto values = {1, 2, 3};   // std::initializer_list&lt;int&gt;</code></pre>
+                
+                <div class="tip">
+                    <h3 class="tip__title">Совет по выбору типов</h3>
+                    <p>Для целых чисел обычно используют <code>int</code>, если не требуется экономия памяти. Для чисел с плавающей точкой предпочтительнее <code>double</code>, так как он обеспечивает достаточную точность для большинства задач.</p>
+                </div>
+            </article>
+            
+            <!-- Навигация между статьями -->
+            <div class="article-navigation">
+                <a href="variables.html" class="button">← Предыдущая статья: Переменные</a>
+                <a href="operators.html" class="button">Следующая статья: Операторы →</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <div class="footer__col">
+                    <h3 class="footer__title">C++ Вики</h3>
+                    <p class="footer__text">Справочник по языку программирования C++ для начинающих.</p>
+                </div>
+                
+                <div class="footer__col">
+                    <h3 class="footer__title">Разделы</h3>
+                    <ul class="footer__list">
+                        <li><a href="../../chapters/basics/variables.html" class="footer__link">Основы</a></li>
+                        <li><a href="../../chapters/functions/declaration.html" class="footer__link">Функции</a></li>
+                        <li><a href="../../chapters/pointers/pointers-basics.html" class="footer__link">Указатели</a></li>
+                        <li><a href="../../chapters/oop/classes.html" class="footer__link">ООП</a></li>
+                        <li><a href="../../chapters/stl/vectors.html" class="footer__link">STL</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer__col">
+                    <h3 class="footer__title">Автор проекта</h3>
+                    <ul class="footer__list">
+                        <li>Студент: Иванов И.И.</li>
+                        <li>Группа: ПИ-123</li>
+                        <li>ВУЗ: НИУ "МЭИ"</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p class="footer__copyright">2025 C++ Вики</p>
+                <a href="#" class="footer__to-top" id="to-top">Наверх ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../../js/prism.js"></script>
+    <script src="../../js/copy-code.js"></script>
+    <script src="../../js/main.js"></script>
+</body>
+</html>

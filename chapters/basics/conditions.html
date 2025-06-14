@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Условные конструкции в C++ | C++ Вики</title>
+    <meta name="description" content="Подробное руководство по условным конструкциям в языке C++ для начинающих">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/prism.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <a href="../../index.html" class="logo">
+                    <span class="logo__icon">C++</span>
+                    <span class="logo__text">Вики</span>
+                </a>
+                
+                <!-- Навигация -->
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="../../index.html" class="nav__link">Главная</a></li>
+                        <li class="nav__item"><a href="variables.html" class="nav__link">Основы</a></li>
+                        <li class="nav__item"><a href="../functions/declaration.html" class="nav__link">Функции</a></li>
+                        <li class="nav__item"><a href="../pointers/pointers-basics.html" class="nav__link">Указатели</a></li>
+                        <li class="nav__item"><a href="../oop/classes.html" class="nav__link">ООП</a></li>
+                        <li class="nav__item"><a href="../stl/vectors.html" class="nav__link">STL</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Поиск -->
+                <div class="search">
+                    <form action="../../search.html" method="GET" class="search__form">
+                        <input type="text" name="q" placeholder="Поиск по справочнику..." class="search__input">
+                        <button type="submit" class="search__button">
+                            <svg class="search__icon" viewBox="0 0 24 24">
+                                <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Мобильное меню -->
+                <button class="menu-toggle" aria-label="Меню">
+                    <span class="menu-toggle__line"></span>
+                    <span class="menu-toggle__line"></span>
+                    <span class="menu-toggle__line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основное содержимое -->
+    <main class="main">
+        <div class="container">
+            <!-- Хлебные крошки -->
+            <nav class="breadcrumbs">
+                <ul class="breadcrumbs__list">
+                    <li class="breadcrumbs__item"><a href="../../index.html" class="breadcrumbs__link">Главная</a></li>
+                    <li class="breadcrumbs__item"><a href="variables.html" class="breadcrumbs__link">Основы</a></li>
+                    <li class="breadcrumbs__item">Условные конструкции</li>
+                </ul>
+            </nav>
+            
+            <!-- Заголовок -->
+            <h1 class="page-title">Условные конструкции в C++</h1>
+            
+            <!-- Введение -->
+            <section class="intro">
+                <p>Условные конструкции позволяют управлять ходом выполнения программы в зависимости от выполнения определенных условий. В C++ существуют несколько способов организации ветвления кода.</p>
+            </section>
+            
+            <!-- Содержание статьи -->
+            <article class="article">
+                <h2>Конструкция if-else</h2>
+                <p>Самая распространенная условная конструкция в C++:</p>
+                
+                <pre><code class="language-cpp line-numbers">if (условие) {
+    // выполняется, если условие истинно
+} else {
+    // выполняется, если условие ложно
+}</code></pre>
+                
+                <h3>Примеры использования</h3>
+                <pre><code class="language-cpp line-numbers">int age = 18;
+
+// Простое условие
+if (age >= 18) {
+    std::cout << "Доступ разрешен" << std::endl;
+} else {
+    std::cout << "Доступ запрещен" << std::endl;
+}
+
+// Несколько условий
+if (age < 13) {
+    std::cout << "Ребенок" << std::endl;
+} else if (age < 18) {
+    std::cout << "Подросток" << std::endl;
+} else {
+    std::cout << "Взрослый" << std::endl;
+}</code></pre>
+                
+                <h2>Тернарный оператор</h2>
+                <p>Короткая форма записи простых условий:</p>
+                
+                <pre><code class="language-cpp line-numbers">переменная = (условие) ? значение_если_истина : значение_если_ложь;</code></pre>
+                
+                <h3>Пример использования</h3>
+                <pre><code class="language-cpp line-numbers">int a = 5, b = 10;
+int max = (a > b) ? a : b;
+
+std::cout << "Максимальное число: " << max << std::endl;</code></pre>
+                
+                <h2>Конструкция switch-case</h2>
+                <p>Используется для выбора одного из многих вариантов:</p>
+                
+                <pre><code class="language-cpp line-numbers">switch (выражение) {
+    case значение1:
+        // код для значение1
+        break;
+    case значение2:
+        // код для значение2
+        break;
+    // ...
+    default:
+        // код, если ни один case не подошел
+}</code></pre>
+                
+                <h3>Пример использования</h3>
+                <pre><code class="language-cpp line-numbers">char grade = 'B';
+
+switch (grade) {
+    case 'A':
+        std::cout << "Отлично!" << std::endl;
+        break;
+    case 'B':
+        std::cout << "Хорошо" << std::endl;
+        break;
+    case 'C':
+        std::cout << "Удовлетворительно" << std::endl;
+        break;
+    case 'D':
+        std::cout << "Неудовлетворительно" << std::endl;
+        break;
+    case 'F':
+        std::cout << "Не сдал" << std::endl;
+        break;
+    default:
+        std::cout << "Неверная оценка" << std::endl;
+}</code></pre>
+                
+                <div class="tip">
+                    <h3 class="tip__title">Совет по использованию switch</h3>
+                    <p>Не забывайте использовать <code>break</code> после каждого <code>case</code>, иначе выполнение "провалится" в следующий <code>case</code>. Это может быть полезно в некоторых случаях, но чаще приводит к ошибкам.</p>
+                </div>
+                
+                <h2>Логические операторы</h2>
+                <p>Для создания сложных условий используются логические операторы:</p>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Оператор</th>
+                                <th>Описание</th>
+                                <th>Пример</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>&amp;&amp;</code></td>
+                                <td>Логическое И</td>
+                                <td><code>if (a > 0 &amp;&amp; b > 0)</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>||</code></td>
+                                <td>Логическое ИЛИ</td>
+                                <td><code>if (a > 0 || b > 0)</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>!</code></td>
+                                <td>Логическое НЕ</td>
+                                <td><code>if (!isFinished)</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h3>Пример сложного условия</h3>
+                <pre><code class="language-cpp line-numbers">int age = 25;
+bool hasLicense = true;
+
+if (age >= 18 &amp;&amp; hasLicense) {
+    std::cout << "Можно водить машину" << std::endl;
+} else if (age >= 18 &amp;&amp; !hasLicense) {
+    std::cout << "Нужно получить права" << std::endl;
+} else {
+    std::cout << "Слишком молод" << std::endl;
+}</code></pre>
+            </article>
+            
+            <!-- Навигация между статьями -->
+            <div class="article-navigation">
+                <a href="loops.html" class="button">← Предыдущая статья: Циклы</a>
+                <a href="arrays.html" class="button">Следующая статья: Массивы →</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <div class="footer__col">
+                    <h3 class="footer__title">C++ Вики</h3>
+                    <p class="footer__text">Справочник по языку программирования C++ для начинающих.</p>
+                </div>
+                
+                <div class="footer__col">
+                    <h3 class="footer__title">Разделы</h3>
+                    <ul class="footer__list">
+                        <li><a href="../../chapters/basics/variables.html" class="footer__link">Основы</a></li>
+                        <li><a href="../../chapters/functions/declaration.html" class="footer__link">Функции</a></li>
+                        <li><a href="../../chapters/pointers/pointers-basics.html" class="footer__link">Указатели</a></li>
+                        <li><a href="../../chapters/oop/classes.html" class="footer__link">ООП</a></li>
+                        <li><a href="../../chapters/stl/vectors.html" class="footer__link">STL</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer__col">
+                    <h3 class="footer__title">Автор проекта</h3>
+                    <ul class="footer__list">
+                        <li>Студент: Иванов И.И.</li>
+                        <li>Группа: ПИ-123</li>
+                        <li>ВУЗ: НИУ "МЭИ"</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p class="footer__copyright">2025 C++ Вики</p>
+                <a href="#" class="footer__to-top" id="to-top">Наверх ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../../js/prism.js"></script>
+    <script src="../../js/copy-code.js"></script>
+    <script src="../../js/main.js"></script>
+</body>
+</html>
