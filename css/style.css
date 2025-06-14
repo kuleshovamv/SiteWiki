@@ -688,7 +688,80 @@ blockquote {
     margin-bottom: var(--space-lg);
 }
 
+/* ==========================================================================
+   Стили  карточек
+   ========================================================================== */
 
+   .card__topics-detailed {
+    list-style-type: none;
+    margin-top: var(--space-md);
+}
+
+.card__topics-detailed li {
+    margin-bottom: var(--space-xs);
+}
+
+.card__topics-detailed a {
+    display: block;
+    padding: var(--space-xs) var(--space-sm);
+    color: var(--accent-color);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+    position: relative;
+    padding-left: var(--space-md);
+}
+
+.card__topics-detailed a::before {
+    content: "▶";
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+    font-size: 0.8rem;
+}
+
+.card__topics-detailed a:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+    text-decoration: none;
+    padding-left: var(--space-lg);
+}
+
+.card__topics-detailed a:hover::before {
+    color: var(--accent-dark);
+}
+
+.card--expanded {
+    grid-column: span 2;
+}
+
+@media (max-width: 768px) {
+    .card--expanded {
+        grid-column: span 1;
+    }
+}
+
+.card__section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-sm);
+}
+
+.card__status {
+    font-size: var(--small-font-size);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    background-color: var(--success-color);
+    color: white;
+}
+
+.card__status--partial {
+    background-color: var(--warning-color);
+}
+
+.card__status--planned {
+    background-color: var(--text-light);
+}
 
 /* ==========================================================================
    Анимации и JavaScript-стили
