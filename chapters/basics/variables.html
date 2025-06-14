@@ -86,10 +86,10 @@
                 <h2>Объявление переменных</h2>
                 <p>В C++ переменные объявляются с указанием типа и имени:</p>
                 
-                <pre><code class="language-cpp line-numbers">// Объявление переменной
+                <pre><code class="language-cpp line-numbers" id="code1">// Объявление переменной
 int age;
 double price;
-char letter;</code></pre>
+char letter;</code><button class="copy-button" data-target="code1" aria-label="Копировать код">Копировать код</button></pre>
                 
                 <p>Где:</p>
                 <ul>
@@ -101,17 +101,17 @@ char letter;</code></pre>
                 <h2>Инициализация переменных</h2>
                 <p>Переменные можно инициализировать при объявлении:</p>
                 
-                <pre><code class="language-cpp line-numbers">// Инициализация при объявлении
+                <pre><code class="language-cpp line-numbers" id="code2">// Инициализация при объявлении
 int count = 10;
 double temperature = 36.6;
-char grade = 'A';</code></pre>
+char grade = 'A';</code><button class="copy-button" data-target="code2" aria-label="Копировать код">Копировать код</button></pre>
                 
                 <p>В C++11 появилась универсальная инициализация с фигурными скобками:</p>
                 
-                <pre><code class="language-cpp line-numbers">// Универсальная инициализация (C++11)
+                <pre><code class="language-cpp line-numbers" id="code3">// Универсальная инициализация (C++11)
 int width{5};
 double height{1.75};
-std::string name{"Alice"};</code></pre>
+std::string name{"Alice"};</code><button class="copy-button" data-target="code3" aria-label="Копировать код">Копировать код</button></pre>
                 
                 <h2>Основные типы данных</h2>
                 <p>C++ предоставляет несколько основных типов данных:</p>
@@ -164,7 +164,7 @@ std::string name{"Alice"};</code></pre>
                 <h2>Область видимости переменных</h2>
                 <p>Область видимости определяет, где переменная может быть использована:</p>
                 
-                <pre><code class="language-cpp line-numbers">#include &lt;iostream&gt;
+                <pre><code class="language-cpp line-numbers" id="code4">#include &lt;iostream&gt;
 
 int globalVar = 10;  // Глобальная переменная
 
@@ -183,24 +183,24 @@ int main() {
     std::cout << localVar << std::endl;
     
     return 0;
-}</code></pre>
+}</code><button class="copy-button" data-target="code4" aria-label="Копировать код">Копировать код</button></pre>
                 
                 <h2>Константные переменные</h2>
                 <p>Для создания неизменяемых переменных используют модификатор <code>const</code>:</p>
                 
-                <pre><code class="language-cpp line-numbers">const double PI = 3.14159;
+                <pre><code class="language-cpp line-numbers" id="code5">const double PI = 3.14159;
 const int MAX_USERS = 100;
 
 // Ошибка: нельзя изменить константу
-// PI = 3.14;</code></pre>
+// PI = 3.14;</code><button class="copy-button" data-target="code5" aria-label="Копировать код">Копировать код</button></pre>
                 
                 <h2>Автоматическое определение типа (C++11)</h2>
                 <p>С C++11 можно использовать ключевое слово <code>auto</code>:</p>
                 
-                <pre><code class="language-cpp line-numbers">auto number = 42;      // int
+                <pre><code class="language-cpp line-numbers" id="code6">auto number = 42;      // int
 auto price = 19.99;    // double
 auto letter = 'A';     // char
-auto isActive = true;  // bool</code></pre>
+auto isActive = true;  // bool</code><button class="copy-button" data-target="code6" aria-label="Копировать код">Копировать код</button></pre>
                 
                 <h2>Правила именования переменных</h2>
                 <p>Рекомендации по именованию переменных:</p>

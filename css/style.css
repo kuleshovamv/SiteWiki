@@ -177,6 +177,7 @@ blockquote {
     text-decoration: none;
     transform: translateY(-1px);
     box-shadow: var(--shadow-sm);
+    color: var(--text-on-primary);
 }
 
 .button--outline {
@@ -188,6 +189,7 @@ blockquote {
 .button--outline:hover {
     background-color: var(--accent-color);
     color: var(--text-on-primary);
+    text-decoration: none;
 }
 
 /* Карточки */

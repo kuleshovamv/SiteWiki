@@ -85,7 +85,7 @@
                 <h2>Цикл while</h2>
                 <p>Цикл while выполняет блок кода, пока условие истинно.</p>
                 
-                <pre><code class="language-cpp line-numbers">// Синтаксис
+                <pre><code class="language-cpp line-numbers" id="code1">// Синтаксис
 while (условие) {
     // Тело цикла
 }
@@ -95,12 +95,12 @@ int i = 0;
 while (i < 5) {
     std::cout << "i = " << i << std::endl;
     i++;
-}</code></pre>
+}</code><button class="copy-button" data-target="code1" aria-label="Копировать код">Копировать код</button></pre>
 
                 <h2>Цикл do-while</h2>
                 <p>Цикл do-while сначала выполняет блок кода, а затем проверяет условие. Гарантирует хотя бы одно выполнение тела цикла.</p>
                 
-                <pre><code class="language-cpp line-numbers">// Синтаксис
+                <pre><code class="language-cpp line-numbers" id="code2">// Синтаксис
 do {
     // Тело цикла
 } while (условие);
@@ -110,12 +110,12 @@ int j = 0;
 do {
     std::cout << "j = " << j << std::endl;
     j++;
-} while (j < 5);</code></pre>
+} while (j < 5);</code><button class="copy-button" data-target="code2" aria-label="Копировать код">Копировать код</button></pre>
 
                 <h2>Цикл for</h2>
                 <p>Цикл for объединяет инициализацию, условие и изменение счетчика в одной строке.</p>
                 
-                <pre><code class="language-cpp line-numbers">// Синтаксис
+                <pre><code class="language-cpp line-numbers" id="code3">// Синтаксис
 for (инициализация; условие; изменение) {
     // Тело цикла
 }
@@ -123,12 +123,12 @@ for (инициализация; условие; изменение) {
 // Пример
 for (int k = 0; k < 5; k++) {
     std::cout << "k = " << k << std::endl;
-}</code></pre>
+}</code><button class="copy-button" data-target="code3" aria-label="Копировать код">Копировать код</button></pre>
 
                 <h2>Цикл for на основе диапазона (C++11)</h2>
                 <p>Упрощает перебор элементов контейнеров и массивов.</p>
                 
-                <pre><code class="language-cpp line-numbers">// Синтаксис
+                <pre><code class="language-cpp line-numbers" id="code4">// Синтаксис
 for (тип элемент : контейнер) {
     // Тело цикла
 }
@@ -142,7 +142,7 @@ for (int num : arr) {
 std::vector&lt;int&gt; vec = {10, 20, 30};
 for (int val : vec) {
     std::cout << val << " ";
-}</code></pre>
+}</code><button class="copy-button" data-target="code4" aria-label="Копировать код">Копировать код</button></pre>
 
                 <h2>Операторы управления циклами</h2>
                 <div class="table-wrapper">
@@ -177,25 +177,25 @@ for (int val : vec) {
                 <h2>Вложенные циклы</h2>
                 <p>Циклы могут содержать другие циклы, создавая вложенные конструкции.</p>
                 
-                <pre><code class="language-cpp line-numbers">// Вывод таблицы умножения
+                <pre><code class="language-cpp line-numbers" id="code5">// Вывод таблицы умножения
 for (int i = 1; i <= 10; i++) {
     for (int j = 1; j <= 10; j++) {
         std::cout << i * j << "\t";
     }
     std::cout << std::endl;
-}</code></pre>
+}</code><button class="copy-button" data-target="code5" aria-label="Копировать код">Копировать код</button></pre>
 
                 <h2>Бесконечные циклы</h2>
                 <p>Циклы могут быть бесконечными, если условие всегда истинно.</p>
                 
-                <pre><code class="language-cpp line-numbers">// Варианты бесконечных циклов
+                <pre><code class="language-cpp line-numbers" id="code6">// Варианты бесконечных циклов
 while (true) {
     // Бесконечный цикл
 }
 
 for (;;) {
     // Бесконечный цикл
-}</code></pre>
+}</code><button class="copy-button" data-target="code6" aria-label="Копировать код">Копировать код</button></pre>
 
                 <div class="tip">
                     <h3 class="tip__title">Совет по выбору цикла</h3>

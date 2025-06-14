@@ -132,14 +132,14 @@
                     </table>
                 </div>
                 
-                <pre><code class="language-cpp line-numbers">int a = 10, b = 3;
+                <pre><code class="language-cpp line-numbers" id="code1">int a = 10, b = 3;
 int sum = a + b;      // 13
 int diff = a - b;     // 7
 int product = a * b;  // 30
 int quotient = a / b; // 3 (целочисленное деление)
 int remainder = a % b;// 1
 a++;                  // a становится 11
---b;                  // b становится 2</code></pre>
+--b;                  // b становится 2</code><button class="copy-button" data-target="code1" aria-label="Копировать код">Копировать код</button></pre>
 
                 <h2>Операторы присваивания</h2>
                 <div class="table-wrapper">
@@ -261,10 +261,10 @@ a++;                  // a становится 11
                     </table>
                 </div>
                 
-                <pre><code class="language-cpp line-numbers">bool isTrue = true, isFalse = false;
+                <pre><code class="language-cpp line-numbers" id="code2">bool isTrue = true, isFalse = false;
 bool result1 = isTrue && isFalse; // false
 bool result2 = isTrue || isFalse; // true
-bool result3 = !isTrue;           // false</code></pre>
+bool result3 = !isTrue;           // false</code><button class="copy-button" data-target="code2" aria-label="Копировать код">Копировать код</button></pre>
 
                 <h2>Битовые операторы</h2>
                 <div class="table-wrapper">
@@ -311,20 +311,20 @@ bool result3 = !isTrue;           // false</code></pre>
                     </table>
                 </div>
                 
-                <pre><code class="language-cpp line-numbers">unsigned int a = 5;    // 0101
+                <pre><code class="language-cpp line-numbers" id="code3">unsigned int a = 5;    // 0101
 unsigned int b = 3;    // 0011
 unsigned int r1 = a & b; // 0001 (1)
 unsigned int r2 = a | b; // 0111 (7)
 unsigned int r3 = a ^ b; // 0110 (6)
 unsigned int r4 = ~a;    // ...11111010 (зависит от размера int)
 unsigned int r5 = a << 1; // 1010 (10)
-unsigned int r6 = a >> 1; // 0010 (2)</code></pre>
+unsigned int r6 = a >> 1; // 0010 (2)</code><button class="copy-button" data-target="code3" aria-label="Копировать код">Копировать код</button></pre>
 
                 <h2>Условный (тернарный) оператор</h2>
                 <p>Синтаксис: <code>условие ? выражение1 : выражение2</code></p>
                 
-                <pre><code class="language-cpp line-numbers">int a = 10, b = 20;
-int max = (a > b) ? a : b; // max будет равно 20</code></pre>
+                <pre><code class="language-cpp line-numbers" id="code4">int a = 10, b = 20;
+int max = (a > b) ? a : b; // max будет равно 20</code><button class="copy-button" data-target="code4" aria-label="Копировать код">Копировать код</button></pre>
 
                 <div class="tip">
                     <h3 class="tip__title">Совет по использованию операторов</h3>
