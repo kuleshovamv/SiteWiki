@@ -979,3 +979,106 @@ mark {
         opacity: 1;
     }
 }
+
+/* ==========================================================================
+   Таблицы
+   ========================================================================== */
+
+   .table-wrapper {
+    overflow-x: auto;
+    margin: var(--space-lg) 0;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    background-color: white;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+table th,
+table td {
+    padding: var(--space-sm) var(--space-md);
+    text-align: left;
+    border: 1px solid var(--background-dark);
+}
+
+table th {
+    background-color: var(--primary-color);
+    color: var(--text-on-primary);
+    font-weight: 600;
+    font-family: var(--font-heading);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+table tbody tr {
+    transition: background-color var(--transition-fast);
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+table tbody tr:hover {
+    background-color: rgba(52, 152, 219, 0.05);
+}
+
+table td code {
+    background-color: var(--background-dark);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-code);
+    font-size: 0.85em;
+    color: var(--primary-color);
+    border: 1px solid #ddd;
+}
+
+/* Адаптивность для таблиц */
+@media (max-width: 768px) {
+    .table-wrapper {
+        margin: var(--space-md) -var(--space-md);
+        border-radius: 0;
+    }
+    
+    table {
+        font-size: 0.8rem;
+    }
+    
+    table th,
+    table td {
+        padding: var(--space-xs) var(--space-sm);
+    }
+}
+
+@media (max-width: 576px) {
+    table th,
+    table td {
+        padding: var(--space-xs);
+        font-size: 0.75rem;
+    }
+    
+    table td code {
+        font-size: 0.7em;
+        padding: 2px 4px;
+    }
+}
+
+/* ==========================================================================
+   Списки
+   ========================================================================== */
+
+ul {
+    padding-left: var(--space-lg);
+    margin-bottom: var(--space-md);
+    list-style-position: inside;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+ul li {
+    margin-bottom: var(--space-xs);
+}
