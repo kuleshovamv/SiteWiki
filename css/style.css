@@ -925,3 +925,57 @@ mark {
 .no-scroll {
     overflow: hidden;
 }
+
+/* ==========================================================================
+   Кнопка копирования кода
+   ========================================================================== */
+
+   pre[class*="language-"] {
+    position: relative;
+    padding-top: 2.5em !important;
+    margin-top: var(--space-md);
+}
+
+.copy-button {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    padding: 0.35em 0.75em;
+    background-color: var(--primary-color);
+    color: var(--text-on-primary);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 0.8em;
+    cursor: pointer;
+    opacity: 1; /* Всегда видимая */
+    transition: all var(--transition-fast);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+}
+
+.copy-button:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.copy-button:active {
+    transform: translateY(1px);
+}
+
+.copy-button::before {
+    content: "📋";
+}
+
+.copy-button.copied::before {
+    content: "✓";
+}
+
+/* Для мобильных устройств всегда показываем кнопку */
+@media (max-width: 768px) {
+    .copy-button {
+        opacity: 1;
+    }
+}
