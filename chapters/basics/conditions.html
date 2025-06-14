@@ -85,14 +85,14 @@
                 <h2>Конструкция if-else</h2>
                 <p>Самая распространенная условная конструкция в C++:</p>
                 
-                <pre><code class="language-cpp line-numbers">if (условие) {
+                <pre><code class="language-cpp line-numbers" id="code1">if (условие) {
     // выполняется, если условие истинно
 } else {
     // выполняется, если условие ложно
-}</code></pre>
+}</code><button class="copy-button" data-target="code1" aria-label="Копировать код">Копировать код</button></pre>
                 
                 <h3>Примеры использования</h3>
-                <pre><code class="language-cpp line-numbers">int age = 18;
+                <pre><code class="language-cpp line-numbers" id="code2">int age = 18;
 
 // Простое условие
 if (age >= 18) {
@@ -108,23 +108,25 @@ if (age < 13) {
     std::cout << "Подросток" << std::endl;
 } else {
     std::cout << "Взрослый" << std::endl;
-}</code></pre>
+}</code><button class="copy-button" data-target="code2" aria-label="Копировать код">Копировать код</button></pre>
                 
                 <h2>Тернарный оператор</h2>
                 <p>Короткая форма записи простых условий:</p>
                 
-                <pre><code class="language-cpp line-numbers">переменная = (условие) ? значение_если_истина : значение_если_ложь;</code></pre>
+                <pre><code class="language-cpp line-numbers" id="code3">
+переменная = (условие) ? значение_если_истина : значение_если_ложь;
+                </code><button class="copy-button" data-target="code3" aria-label="Копировать">Копировать</button></pre>
                 
                 <h3>Пример использования</h3>
-                <pre><code class="language-cpp line-numbers">int a = 5, b = 10;
+                <pre><code class="language-cpp line-numbers" id="code4">int a = 5, b = 10;
 int max = (a > b) ? a : b;
 
-std::cout << "Максимальное число: " << max << std::endl;</code></pre>
+std::cout << "Максимальное число: " << max << std::endl;</code><button class="copy-button" data-target="code4" aria-label="Копировать код">Копировать код</button></pre>
                 
                 <h2>Конструкция switch-case</h2>
                 <p>Используется для выбора одного из многих вариантов:</p>
                 
-                <pre><code class="language-cpp line-numbers">switch (выражение) {
+                <pre><code class="language-cpp line-numbers" id="code5">switch (выражение) {
     case значение1:
         // код для значение1
         break;
@@ -134,10 +136,10 @@ std::cout << "Максимальное число: " << max << std::endl;</code>
     // ...
     default:
         // код, если ни один case не подошел
-}</code></pre>
+}</code><button class="copy-button" data-target="code5" aria-label="Копировать код">Копировать код</button></pre>
                 
                 <h3>Пример использования</h3>
-                <pre><code class="language-cpp line-numbers">char grade = 'B';
+                <pre><code class="language-cpp line-numbers" id="code6">char grade = 'B';
 
 switch (grade) {
     case 'A':
@@ -157,7 +159,7 @@ switch (grade) {
         break;
     default:
         std::cout << "Неверная оценка" << std::endl;
-}</code></pre>
+}</code><button class="copy-button" data-target="code6" aria-label="Копировать код">Копировать код</button></pre>
                 
                 <div class="tip">
                     <h3 class="tip__title">Совет по использованию switch</h3>
@@ -197,7 +199,7 @@ switch (grade) {
                 </div>
                 
                 <h3>Пример сложного условия</h3>
-                <pre><code class="language-cpp line-numbers">int age = 25;
+                <pre><code class="language-cpp line-numbers" id="code7">int age = 25;
 bool hasLicense = true;
 
 if (age >= 18 &amp;&amp; hasLicense) {
@@ -206,7 +208,7 @@ if (age >= 18 &amp;&amp; hasLicense) {
     std::cout << "Нужно получить права" << std::endl;
 } else {
     std::cout << "Слишком молод" << std::endl;
-}</code></pre>
+}</code><button class="copy-button" data-target="code7" aria-label="Копировать код">Копировать код</button></pre>
             </article>
             
             <!-- Навигация между статьями -->
