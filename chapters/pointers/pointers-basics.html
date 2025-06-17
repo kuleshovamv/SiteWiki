@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Основы указателей в C++ | C++ Вики</title>
+    <meta name="description" content="Подробное руководство по указателям в языке C++ для начинающих">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/prism.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <div data-include="../../includes/header.html"></div>
+
+    <!-- Основное содержимое -->
+    <main class="main">
+        <div class="container">
+            <!-- Хлебные крошки -->
+            <nav class="breadcrumbs">
+                <ul class="breadcrumbs__list">
+                    <li class="breadcrumbs__item"><a href="../../index.html" class="breadcrumbs__link">Главная</a></li>
+                    <li class="breadcrumbs__item"><a href="../pointers/pointers-basics.html" class="breadcrumbs__link">Указатели и ссылки</a></li>
+                    <li class="breadcrumbs__item">Основы указателей</li>
+                </ul>
+            </nav>
+            
+            <!-- Заголовок -->
+            <h1 class="page-title">Основы указателей в C++</h1>
+            
+            <!-- Введение -->
+            <section class="intro">
+                <p>Указатели - это мощный инструмент в C++, который позволяет работать с памятью напрямую. Они хранят адреса других переменных и обеспечивают гибкость в управлении памятью.</p>
+                <p>В этом разделе вы узнаете, что такое указатели, как их объявлять, инициализировать и использовать в своих программах.</p>
+            </section>
+            
+            <!-- Содержание статьи -->
+            <article class="article">
+                <h2>Что такое указатель?</h2>
+                <p>Указатель - это переменная, которая хранит адрес другой переменной в памяти. Основные характеристики:</p>
+                <ul>
+                    <li>Каждый указатель имеет тип, соответствующий типу переменной, на которую он указывает</li>
+                    <li>Размер указателя зависит от архитектуры системы (обычно 4 или 8 байт)</li>
+                    <li>Указатели позволяют работать с памятью напрямую</li>
+                </ul>
+                
+                <pre><code class="language-cpp line-numbers" id="code1">// Пример объявления указателя
+int main() {
+    int var = 42;       // Обычная переменная
+    int* ptr = &var;    // Указатель на var
+    
+    std::cout << "Значение var: " << var << std::endl;  // 42
+    std::cout << "Адрес var: " << &var << std::endl;    // Адрес в памяти
+    std::cout << "Значение ptr: " << ptr << std::endl;  // Адрес var
+    std::cout << "Значение по ptr: " << *ptr << std::endl; // 42
+    
+    return 0;
+}</code><button class="copy-button" data-target="code1" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <div class="warning">
+                    <h3 class="warning__title">Важно!</h3>
+                    <p>Неинициализированные указатели содержат "мусорные" значения и могут привести к неопределенному поведению. Всегда инициализируйте указатели перед использованием.</p>
+                </div>
+                
+                <h2>Операторы работы с указателями</h2>
+                
+                <h3>1. Оператор взятия адреса (&)</h3>
+                <p>Возвращает адрес переменной в памяти:</p>
+                <pre><code class="language-cpp line-numbers" id="code2">int x = 10;
+int* p = &x; // p хранит адрес x</code><button class="copy-button" data-target="code2" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h3>2. Оператор разыменования (*)</h3>
+                <p>Позволяет получить доступ к значению по адресу, хранящемуся в указателе:</p>
+                <pre><code class="language-cpp line-numbers" id="code3">int value = *p; // value = 10
+*p = 20;       // Изменяем значение x через указатель</code><button class="copy-button" data-target="code3" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Нулевой указатель</h2>
+                <p>Указатель, который не ссылается ни на какой объект. В C++11 рекомендуется использовать <code>nullptr</code>:</p>
+                <pre><code class="language-cpp line-numbers" id="code4">int* ptr1 = nullptr; // Современный C++
+int* ptr2 = NULL;    // Устаревший стиль
+int* ptr3 = 0;       // Альтернативный вариант</code><button class="copy-button" data-target="code4" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <div class="tip">
+                    <h3 class="tip__title">Совет</h3>
+                    <p>Всегда проверяйте указатели на <code>nullptr</code> перед разыменованием, чтобы избежать ошибок сегментации.</p>
+                </div>
+                
+                <h2>Указатели и массивы</h2>
+                <p>Имя массива - это указатель на его первый элемент. Указатели позволяют эффективно работать с массивами:</p>
+                <pre><code class="language-cpp line-numbers" id="code5">int arr[5] = {1, 2, 3, 4, 5};
+int* ptr = arr; // Эквивалентно &arr[0]
+
+// Доступ к элементам массива через указатель
+std::cout << "Первый элемент: " << *ptr << std::endl; // 1
+std::cout << "Второй элемент: " << *(ptr + 1) << std::endl; // 2
+
+// Итерация по массиву с помощью указателя
+for (int i = 0; i < 5; i++) {
+    std::cout << *(ptr + i) << " "; // 1 2 3 4 5
+}</code><button class="copy-button" data-target="code5" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Арифметика указателей</h2>
+                <p>С указателями можно выполнять следующие операции:</p>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Операция</th>
+                                <th>Описание</th>
+                                <th>Пример</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Инкремент (++)</td>
+                                <td>Перемещает указатель на следующий элемент</td>
+                                <td><code>ptr++</code></td>
+                            </tr>
+                            <tr>
+                                <td>Декремент (--)</td>
+                                <td>Перемещает указатель на предыдущий элемент</td>
+                                <td><code>ptr--</code></td>
+                            </tr>
+                            <tr>
+                                <td>Сложение (+)</td>
+                                <td>Перемещает указатель на N элементов вперед</td>
+                                <td><code>ptr + 3</code></td>
+                            </tr>
+                            <tr>
+                                <td>Вычитание (-)</td>
+                                <td>Перемещает указатель на N элементов назад</td>
+                                <td><code>ptr - 2</code></td>
+                            </tr>
+                            <tr>
+                                <td>Разность указателей</td>
+                                <td>Возвращает количество элементов между указателями</td>
+                                <td><code>ptr2 - ptr1</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h2>Указатели на указатели</h2>
+                <p>C++ позволяет создавать указатели на указатели. Это полезно для работы с многомерными массивами и динамической памятью:</p>
+                <pre><code class="language-cpp line-numbers" id="code6">int var = 10;
+int* ptr = &var;
+int** ptrToPtr = &ptr;
+
+std::cout << "var: " << var << std::endl;            // 10
+std::cout << "*ptr: " << *ptr << std::endl;          // 10
+std::cout << "**ptrToPtr: " << **ptrToPtr << std::endl; // 10</code><button class="copy-button" data-target="code6" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Константные указатели</h2>
+                <p>В C++ есть несколько вариантов константных указателей:</p>
+                
+                <h3>1. Указатель на константу</h3>
+                <p>Нельзя изменить значение, на которое указывает указатель:</p>
+                <pre><code class="language-cpp line-numbers" id="code7">const int* ptr; // Указатель на константу
+int const* ptr; // Альтернативный синтаксис</code><button class="copy-button" data-target="code7" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h3>2. Константный указатель</h3>
+                <p>Нельзя изменить адрес, хранящийся в указателе:</p>
+                <pre><code class="language-cpp line-numbers" id="code8">int* const ptr = &var; // Константный указатель</code><button class="copy-button" data-target="code8" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h3>3. Константный указатель на константу</h3>
+                <p>Нельзя изменить ни адрес, ни значение:</p>
+                <pre><code class="language-cpp line-numbers" id="code9">const int* const ptr = &var;</code><button class="copy-button" data-target="code9" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Опасности при работе с указателями</h2>
+                <ul>
+                    <li><strong>Висячие указатели</strong> - указатели на освобожденную память</li>
+                    <li><strong>Утечки памяти</strong> - неосвобожденная динамическая память</li>
+                    <li><strong>Переполнение буфера</strong> - выход за границы массива</li>
+                    <li><strong>Неинициализированные указатели</strong> - могут указывать на случайную область памяти</li>
+                </ul>
+                
+                <div class="tip">
+                    <h3 class="tip__title">Лучшие практики</h3>
+                    <p>1. Всегда инициализируйте указатели<br>
+                    2. Проверяйте указатели на <code>nullptr</code> перед использованием<br>
+                    3. Используйте умные указатели (<code>unique_ptr</code>, <code>shared_ptr</code>) вместо сырых<br>
+                    4. Освобождайте динамическую память с помощью <code>delete</code></p>
+                </div>
+            </article>
+            
+            <!-- Навигация между статьями -->
+            <div class="article-navigation">
+                <a href="../../index.html" class="button">На главную</a>
+                <a href="references.html" class="button">Следующая статья: Ссылки →</a>
+            </div>
+        </div>
+    </main>
+    
+    <div data-include="../../includes/footer.html"></div>
+
+    <!-- JavaScript -->
+    <script src="../../js/prism.js"></script>
+    <script src="../../js/copy-code.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="../../js/includes.js"></script>
+</body>
+</html>

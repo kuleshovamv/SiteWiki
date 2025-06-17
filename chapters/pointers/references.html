@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ссылки в C++ | C++ Вики</title>
+    <meta name="description" content="Подробное руководство по ссылкам в языке C++ для начинающих">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/prism.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <div data-include="../../includes/header.html"></div>
+
+    <!-- Основное содержимое -->
+    <main class="main">
+        <div class="container">
+            <!-- Хлебные крошки -->
+            <nav class="breadcrumbs">
+                <ul class="breadcrumbs__list">
+                    <li class="breadcrumbs__item"><a href="../../index.html" class="breadcrumbs__link">Главная</a></li>
+                    <li class="breadcrumbs__item"><a href="../pointers/pointers-basics.html" class="breadcrumbs__link">Указатели и ссылки</a></li>
+                    <li class="breadcrumbs__item">Ссылки</li>
+                </ul>
+            </nav>
+            
+            <!-- Заголовок -->
+            <h1 class="page-title">Ссылки в C++</h1>
+            
+            <!-- Введение -->
+            <section class="intro">
+                <p>Ссылки в C++ представляют собой альтернативное имя для уже существующей переменной. Они обеспечивают более безопасный и удобный способ работы с данными по сравнению с указателями.</p>
+                <p>В этом разделе вы изучите синтаксис ссылок, их отличия от указателей и практические применения в программировании.</p>
+            </section>
+            
+            <!-- Содержание статьи -->
+            <article class="article">
+                <h2>Что такое ссылка?</h2>
+                <p>Ссылка - это псевдоним (alias) для существующей переменной. Основные характеристики:</p>
+                <ul>
+                    <li>Ссылка должна быть инициализирована при объявлении</li>
+                    <li>После инициализации нельзя изменить, на что ссылается ссылка</li>
+                    <li>Ссылка не занимает дополнительной памяти</li>
+                    <li>Ссылка не может быть null</li>
+                </ul>
+                
+                <pre><code class="language-cpp line-numbers" id="code1">// Пример объявления и использования ссылки
+int main() {
+    int original = 42;
+    int& ref = original;  // Создаем ссылку на original
+    
+    std::cout << "original: " << original << std::endl;  // 42
+    std::cout << "ref: " << ref << std::endl;            // 42
+    
+    ref = 100;  // Изменяем значение через ссылку
+    
+    std::cout << "original: " << original << std::endl;  // 100
+    std::cout << "ref: " << ref << std::endl;            // 100
+    
+    return 0;
+}</code><button class="copy-button" data-target="code1" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <div class="warning">
+                    <h3 class="warning__title">Важно!</h3>
+                    <p>Ссылка должна быть инициализирована при объявлении. Объявление <code>int& ref;</code> без инициализации приведет к ошибке компиляции.</p>
+                </div>
+                
+                <h2>Синтаксис объявления ссылок</h2>
+                <p>Ссылки объявляются с помощью оператора <code>&</code>:</p>
+                <pre><code class="language-cpp line-numbers" id="code2">int var = 10;
+int& reference = var;  // Ссылка на int
+
+double price = 99.99;
+double& priceRef = price;  // Ссылка на double
+
+// Можно объявлять несколько ссылок
+int a = 1, b = 2;
+int& refA = a;
+int& refB = b;</code><button class="copy-button" data-target="code2" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Ссылки vs Указатели</h2>
+                <p>Сравнение основных характеристик ссылок и указателей:</p>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Характеристика</th>
+                                <th>Ссылки</th>
+                                <th>Указатели</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Инициализация</td>
+                                <td>Обязательная при объявлении</td>
+                                <td>Может быть отложена</td>
+                            </tr>
+                            <tr>
+                                <td>Изменение цели</td>
+                                <td>Невозможно</td>
+                                <td>Возможно</td>
+                            </tr>
+                            <tr>
+                                <td>Null значение</td>
+                                <td>Невозможно</td>
+                                <td>Возможно (nullptr)</td>
+                            </tr>
+                            <tr>
+                                <td>Арифметика</td>
+                                <td>Не поддерживается</td>
+                                <td>Поддерживается</td>
+                            </tr>
+                            <tr>
+                                <td>Память</td>
+                                <td>Не занимает дополнительную память</td>
+                                <td>Занимает память для хранения адреса</td>
+                            </tr>
+                            <tr>
+                                <td>Синтаксис доступа</td>
+                                <td>Прямой (как обычная переменная)</td>
+                                <td>Требует разыменования (*)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h2>Передача параметров по ссылке</h2>
+                <p>Одно из главных применений ссылок - передача параметров в функции:</p>
+                
+                <h3>Без ссылок (по значению)</h3>
+                <pre><code class="language-cpp line-numbers" id="code3">void swapByValue(int a, int b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
+int main() {
+    int x = 10, y = 20;
+    swapByValue(x, y);
+    std::cout << "x: " << x << ", y: " << y << std::endl; // x: 10, y: 20 (не изменились!)
+    return 0;
+}</code><button class="copy-button" data-target="code3" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h3>С ссылками (по ссылке)</h3>
+                <pre><code class="language-cpp line-numbers" id="code4">void swapByReference(int& a, int& b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
+int main() {
+    int x = 10, y = 20;
+    swapByReference(x, y);
+    std::cout << "x: " << x << ", y: " << y << std::endl; // x: 20, y: 10 (изменились!)
+    return 0;
+}</code><button class="copy-button" data-target="code4" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <div class="tip">
+                    <h3 class="tip__title">Преимущества передачи по ссылке</h3>
+                    <p>1. <strong>Эффективность</strong> - нет копирования больших объектов<br>
+                    2. <strong>Изменение данных</strong> - функция может модифицировать исходные данные<br>
+                    3. <strong>Простота синтаксиса</strong> - не нужно использовать операторы * и &</p>
+                </div>
+                
+                <h2>Константные ссылки</h2>
+                <p>Константные ссылки позволяют читать данные, но не изменять их:</p>
+                <pre><code class="language-cpp line-numbers" id="code5">void printValue(const int& value) {
+    std::cout << "Значение: " << value << std::endl;
+    // value = 100; // Ошибка! Нельзя изменить константную ссылку
+}
+
+int main() {
+    int number = 42;
+    printValue(number);  // Передача по константной ссылке
+    
+    // Константные ссылки могут ссылаться на временные объекты
+    const int& tempRef = 100;  // Разрешено для const ссылок
+    
+    return 0;
+}</code><button class="copy-button" data-target="code5" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Ссылки на массивы</h2>
+                <p>Ссылки могут использоваться для работы с массивами:</p>
+                <pre><code class="language-cpp line-numbers" id="code6">void printArray(const int (&arr)[5]) {  // Ссылка на массив из 5 элементов
+    for (int i = 0; i < 5; i++) {
+        std::cout << arr[i] << " ";
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    int numbers[5] = {1, 2, 3, 4, 5};
+    int (&arrayRef)[5] = numbers;  // Ссылка на массив
+    
+    printArray(numbers);    // Передача массива по ссылке
+    arrayRef[0] = 100;      // Изменение через ссылку
+    printArray(numbers);    // 100 2 3 4 5
+    
+    return 0;
+}</code><button class="copy-button" data-target="code6" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Возврат ссылок из функций</h2>
+                <p>Функции могут возвращать ссылки, что позволяет создавать цепочки операций:</p>
+                <pre><code class="language-cpp line-numbers" id="code7">int& getElement(int arr[], int index) {
+    return arr[index];  // Возвращаем ссылку на элемент массива
+}
+
+int main() {
+    int data[5] = {10, 20, 30, 40, 50};
+    
+    // Получаем ссылку на элемент и изменяем его
+    getElement(data, 2) = 999;
+    
+    std::cout << "data[2] = " << data[2] << std::endl;  // 999
+    
+    // Цепочка операций
+    int& ref = getElement(data, 0);
+    ref = 100;
+    
+    return 0;
+}</code><button class="copy-button" data-target="code7" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <div class="warning">
+                    <h3 class="warning__title">Осторожно!</h3>
+                    <p>Никогда не возвращайте ссылку на локальную переменную! Локальные переменные уничтожаются при выходе из функции, и ссылка станет недействительной.</p>
+                </div>
+                
+                <h2>Rvalue ссылки (C++11)</h2>
+                <p>В C++11 появились rvalue ссылки, обозначаемые двойным амперсандом <code>&&</code>:</p>
+                <pre><code class="language-cpp line-numbers" id="code8">void processValue(int&& value) {  // rvalue ссылка
+    std::cout << "Получено временное значение: " << value << std::endl;
+}
+
+int main() {
+    processValue(42);        // OK - 42 это rvalue
+    processValue(10 + 20);   // OK - результат выражения это rvalue
+    
+    int x = 100;
+    // processValue(x);      // Ошибка! x это lvalue
+    processValue(std::move(x)); // OK - std::move превращает lvalue в rvalue
+    
+    return 0;
+}</code><button class="copy-button" data-target="code8" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Практические примеры</h2>
+                
+                <h3>Пример 1: Функция для нахождения максимума с изменением</h3>
+                <pre><code class="language-cpp line-numbers" id="code9">void findMax(const int& a, const int& b, int& result) {
+    result = (a > b) ? a : b;
+}
+
+int main() {
+    int x = 15, y = 25, maximum;
+    findMax(x, y, maximum);
+    std::cout << "Максимум: " << maximum << std::endl;  // 25
+    return 0;
+}</code><button class="copy-button" data-target="code9" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h3>Пример 2: Работа с большими объектами</h3>
+                <pre><code class="language-cpp line-numbers" id="code10">struct LargeObject {
+    int data[1000];
+    // Конструктор и другие методы...
+};
+
+// Эффективная передача большого объекта
+void processObject(const LargeObject& obj) {
+    // Обработка объекта без копирования
+    std::cout << "Обрабатываем объект размером: " 
+              << sizeof(obj) << " байт" << std::endl;
+}
+
+int main() {
+    LargeObject bigObj;
+    processObject(bigObj);  // Передача по ссылке - быстро!
+    return 0;
+}</code><button class="copy-button" data-target="code10" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Распространенные ошибки</h2>
+                <ul>
+                    <li><strong>Неинициализированная ссылка</strong> - приводит к ошибке компиляции</li>
+                    <li><strong>Возврат ссылки на локальную переменную</strong> - создает висячую ссылку</li>
+                    <li><strong>Попытка изменить константную ссылку</strong> - ошибка компиляции</li>
+                    <li><strong>Путаница между ссылками и указателями</strong> - разный синтаксис использования</li>
+                </ul>
+                
+                <div class="tip">
+                    <h3 class="tip__title">Лучшие практики</h3>
+                    <p>1. Используйте константные ссылки для передачи больших объектов, которые не нужно изменять<br>
+                    2. Предпочитайте ссылки указателям, когда не нужна арифметика указателей<br>
+                    3. Используйте ссылки для создания псевдонимов сложных выражений<br>
+                    4. Всегда инициализируйте ссылки при объявлении</p>
+                </div>
+                
+                <h2>Заключение</h2>
+                <p>Ссылки в C++ - это мощный инструмент, который делает код более читаемым и эффективным. Они особенно полезны для:</p>
+                <ul>
+                    <li>Передачи больших объектов в функции без копирования</li>
+                    <li>Создания функций, которые могут изменять переданные параметры</li>
+                    <li>Упрощения синтаксиса по сравнению с указателями</li>
+                    <li>Обеспечения безопасности - ссылки не могут быть null</li>
+                </ul>
+            </article>
+            
+            <!-- Навигация между статьями -->
+            <div class="article-navigation">
+                <a href="pointers-basics.html" class="button">← Предыдущая статья: Основы указателей</a>
+                <a href="../../index.html" class="button">На главную</a>
+                <a href="dynamic-memory.html" class="button">Следующая статья: Динамическая память →</a>
+            </div>
+        </div>
+    </main>
+    
+    <div data-include="../../includes/footer.html"></div>
+
+    <!-- JavaScript -->
+    <script src="../../js/prism.js"></script>
+    <script src="../../js/copy-code.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="../../js/includes.js"></script>
+</body>
+</html>

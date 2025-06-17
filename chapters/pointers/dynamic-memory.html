@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Динамическая память в C++ | C++ Вики</title>
+    <meta name="description" content="Подробное руководство по работе с динамической памятью в C++">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/prism.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <div data-include="../../includes/header.html"></div>
+
+    <!-- Основное содержимое -->
+    <main class="main">
+        <div class="container">
+            <!-- Хлебные крошки -->
+            <nav class="breadcrumbs">
+                <ul class="breadcrumbs__list">
+                    <li class="breadcrumbs__item"><a href="../../index.html" class="breadcrumbs__link">Главная</a></li>
+                    <li class="breadcrumbs__item"><a href="../pointers/pointers-basics.html" class="breadcrumbs__link">Указатели и ссылки</a></li>
+                    <li class="breadcrumbs__item">Динамическая память</li>
+                </ul>
+            </nav>
+            
+            <!-- Заголовок -->
+            <h1 class="page-title">Динамическая память в C++</h1>
+            
+            <!-- Введение -->
+            <section class="intro">
+                <p>Динамическая память позволяет выделять и освобождать память во время выполнения программы. Это мощный инструмент, который дает гибкость в управлении ресурсами, но требует осторожного обращения.</p>
+                <p>В этом разделе вы изучите операторы <code>new</code> и <code>delete</code>, работу с динамическими массивами и современные подходы к управлению памятью.</p>
+            </section>
+            
+            <!-- Содержание статьи -->
+            <article class="article">
+                <h2>Что такое динамическая память?</h2>
+                <p>Динамическая память выделяется в куче (heap) во время выполнения программы. Основные характеристики:</p>
+                <ul>
+                    <li>Размер может определяться во время выполнения</li>
+                    <li>Память существует до явного освобождения</li>
+                    <li>Доступ через указатели</li>
+                    <li>Программист несет ответственность за освобождение</li>
+                </ul>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Тип памяти</th>
+                                <th>Стек (Stack)</th>
+                                <th>Куча (Heap)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Скорость доступа</td>
+                                <td>Быстрая</td>
+                                <td>Медленная</td>
+                            </tr>
+                            <tr>
+                                <td>Размер</td>
+                                <td>Ограниченный</td>
+                                <td>Большой</td>
+                            </tr>
+                            <tr>
+                                <td>Управление</td>
+                                <td>Автоматическое</td>
+                                <td>Ручное</td>
+                            </tr>
+                            <tr>
+                                <td>Время жизни</td>
+                                <td>Область видимости</td>
+                                <td>До delete</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h2>Оператор new</h2>
+                <p>Оператор <code>new</code> выделяет память в куче и возвращает указатель на выделенную область:</p>
+                
+                <h3>Выделение памяти для одного объекта</h3>
+                <pre><code class="language-cpp line-numbers" id="code1">int main() {
+    // Выделение памяти для одного int
+    int* ptr = new int(42);  // Инициализация значением 42
+    
+    std::cout << "Значение: " << *ptr << std::endl;  // 42
+    std::cout << "Адрес: " << ptr << std::endl;      // Адрес в куче
+    
+    // Освобождение памяти
+    delete ptr;
+    ptr = nullptr;  // Хорошая практика
+    
+    return 0;
+}</code><button class="copy-button" data-target="code1" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h3>Различные способы инициализации</h3>
+                <pre><code class="language-cpp line-numbers" id="code2">// Различные способы выделения и инициализации
+int* p1 = new int;          // Неинициализированное значение
+int* p2 = new int();        // Инициализация нулем
+int* p3 = new int(100);     // Инициализация значением 100
+int* p4 = new int{200};     // Uniform initialization (C++11)
+
+double* d1 = new double(3.14);
+char* c1 = new char('A');</code><button class="copy-button" data-target="code2" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Оператор delete</h2>
+                <p>Оператор <code>delete</code> освобождает память, выделенную с помощью <code>new</code>:</p>
+                <pre><code class="language-cpp line-numbers" id="code3">int* ptr = new int(50);
+// Использование ptr...
+delete ptr;         // Освобождение памяти
+ptr = nullptr;      // Предотвращение повторного использования</code><button class="copy-button" data-target="code3" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <div class="warning">
+                    <h3 class="warning__title">Важные правила!</h3>
+                    <p>1. Каждый <code>new</code> должен соответствовать одному <code>delete</code><br>
+                    2. Не используйте указатель после <code>delete</code><br>
+                    3. Не вызывайте <code>delete</code> дважды для одного указателя<br>
+                    4. Устанавливайте указатель в <code>nullptr</code> после <code>delete</code></p>
+                </div>
+                
+                <h2>Динамические массивы</h2>
+                <p>Для работы с массивами используются операторы <code>new[]</code> и <code>delete[]</code>:</p>
+                
+                <h3>Выделение массива</h3>
+                <pre><code class="language-cpp line-numbers" id="code4">int main() {
+    // Размер массива может быть определен во время выполнения
+    int size;
+    std::cout << "Введите размер массива: ";
+    std::cin >> size;
+    
+    // Выделение памяти для массива
+    int* arr = new int[size];
+    
+    // Заполнение массива
+    for (int i = 0; i < size; i++) {
+        arr[i] = i * i;
+    }
+    
+    // Вывод массива
+    for (int i = 0; i < size; i++) {
+        std::cout << arr[i] << " ";
+    }
+    std::cout << std::endl;
+    
+    // Освобождение памяти массива
+    delete[] arr;
+    arr = nullptr;
+    
+    return 0;
+}</code><button class="copy-button" data-target="code4" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h3>Инициализация динамических массивов</h3>
+                <pre><code class="language-cpp line-numbers" id="code5">// C++11 и новее - инициализация списком
+int* arr1 = new int[5]{1, 2, 3, 4, 5};
+
+// Инициализация нулями
+int* arr2 = new int[10]();  // Все элементы = 0
+
+// Частичная инициализация
+int* arr3 = new int[5]{1, 2};  // {1, 2, 0, 0, 0}</code><button class="copy-button" data-target="code5" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Многомерные динамические массивы</h2>
+                <p>Создание двумерных и многомерных массивов в динамической памяти:</p>
+                
+                <h3>Двумерный массив (массив указателей)</h3>
+                <pre><code class="language-cpp line-numbers" id="code6">int** create2DArray(int rows, int cols) {
+    // Создаем массив указателей на строки
+    int** matrix = new int*[rows];
+    
+    // Создаем каждую строку
+    for (int i = 0; i < rows; i++) {
+        matrix[i] = new int[cols];
+    }
+    
+    return matrix;
+}
+
+void delete2DArray(int** matrix, int rows) {
+    // Освобождаем каждую строку
+    for (int i = 0; i < rows; i++) {
+        delete[] matrix[i];
+    }
+    // Освобождаем массив указателей
+    delete[] matrix;
+}
+
+int main() {
+    int rows = 3, cols = 4;
+    int** matrix = create2DArray(rows, cols);
+    
+    // Заполнение матрицы
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            matrix[i][j] = i * cols + j;
+        }
+    }
+    
+    // Освобождение памяти
+    delete2DArray(matrix, rows);
+    
+    return 0;
+}</code><button class="copy-button" data-target="code6" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h3>Альтернативный способ - одномерный массив</h3>
+                <pre><code class="language-cpp line-numbers" id="code7">class Matrix {
+private:
+    int* data;
+    int rows, cols;
+    
+public:
+    Matrix(int r, int c) : rows(r), cols(c) {
+        data = new int[rows * cols];
+    }
+    
+    ~Matrix() {
+        delete[] data;
+    }
+    
+    // Доступ к элементу
+    int& operator()(int row, int col) {
+        return data[row * cols + col];
+    }
+    
+    const int& operator()(int row, int col) const {
+        return data[row * cols + col];
+    }
+};</code><button class="copy-button" data-target="code7" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Работа с объектами</h2>
+                <p>Динамическое создание объектов классов:</p>
+                <pre><code class="language-cpp line-numbers" id="code8">class Person {
+private:
+    std::string name;
+    int age;
+    
+public:
+    Person(const std::string& n, int a) : name(n), age(a) {
+        std::cout << "Создан объект: " << name << std::endl;
+    }
+    
+    ~Person() {
+        std::cout << "Уничтожен объект: " << name << std::endl;
+    }
+    
+    void display() const {
+        std::cout << "Имя: " << name << ", Возраст: " << age << std::endl;
+    }
+};
+
+int main() {
+    // Создание объекта в динамической памяти
+    Person* p1 = new Person("Алексей", 25);
+    p1->display();
+    
+    // Массив объектов
+    Person* people = new Person[2]{
+        Person("Мария", 30),
+        Person("Иван", 28)
+    };
+    
+    // Использование объектов
+    for (int i = 0; i < 2; i++) {
+        people[i].display();
+    }
+    
+    // Освобождение памяти
+    delete p1;       // Вызывается деструктор для одного объекта
+    delete[] people; // Вызывается деструктор для каждого объекта в массиве
+    
+    return 0;
+}</code><button class="copy-button" data-target="code8" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Обработка ошибок выделения памяти</h2>
+                <p>Что происходит, когда память не может быть выделена:</p>
+                
+                <h3>Стандартное поведение new</h3>
+                <pre><code class="language-cpp line-numbers" id="code9">try {
+    // Попытка выделить огромное количество памяти
+    int* huge_array = new int[1000000000000];  // Может вызвать исключение
+    delete[] huge_array;
+} catch (const std::bad_alloc& e) {
+    std::cout << "Ошибка выделения памяти: " << e.what() << std::endl;
+}</code><button class="copy-button" data-target="code9" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h3>Nothrow версия new</h3>
+                <pre><code class="language-cpp line-numbers" id="code10">// new(nothrow) возвращает nullptr вместо исключения
+int* ptr = new(std::nothrow) int[1000000000000];
+if (ptr == nullptr) {
+    std::cout << "Не удалось выделить память" << std::endl;
+} else {
+    // Использование ptr
+    delete[] ptr;
+}</code><button class="copy-button" data-target="code10" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Утечки памяти и их предотвращение</h2>
+                <p>Утечка памяти происходит, когда выделенная память не освобождается:</p>
+                
+                <h3>Пример утечки памяти</h3>
+                <pre><code class="language-cpp line-numbers" id="code11">void memoryLeak() {
+    int* ptr = new int(100);
+    // Память выделена, но не освобождена
+    return; // ptr теряется, память остается занятой
+}
+
+void earlyReturn() {
+    int* data = new int[1000];
+    
+    if (someCondition) {
+        return; // Утечка! Память не освобождена
+    }
+    
+    delete[] data; // Этот код может не выполниться
+}</code><button class="copy-button" data-target="code11" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h3>RAII (Resource Acquisition Is Initialization)</h3>
+                <pre><code class="language-cpp line-numbers" id="code12">class SafeArray {
+private:
+    int* data;
+    size_t size;
+    
+public:
+    SafeArray(size_t s) : size(s) {
+        data = new int[size];
+    }
+    
+    ~SafeArray() {
+        delete[] data; // Автоматическое освобождение
+    }
+    
+    // Запрет копирования (для простоты)
+    SafeArray(const SafeArray&) = delete;
+    SafeArray& operator=(const SafeArray&) = delete;
+    
+    int& operator[](size_t index) {
+        return data[index];
+    }
+};
+
+void safeFunction() {
+    SafeArray arr(1000); // Память выделяется
+    
+    if (someCondition) {
+        return; // Деструктор автоматически освободит память
+    }
+    
+    // Деструктор вызовется при выходе из функции
+}</code><button class="copy-button" data-target="code12" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Умные указатели (C++11)</h2>
+                <p>Современный C++ предоставляет умные указатели для автоматического управления памятью:</p>
+                
+                <h3>unique_ptr</h3>
+                <pre><code class="language-cpp line-numbers" id="code13">#include <memory>
+
+int main() {
+    // Создание unique_ptr
+    std::unique_ptr<int> ptr = std::make_unique<int>(42);
+    
+    std::cout << "Значение: " << *ptr << std::endl;
+    
+    // Массив с unique_ptr
+    std::unique_ptr<int[]> arr = std::make_unique<int[]>(10);
+    for (int i = 0; i < 10; i++) {
+        arr[i] = i;
+    }
+    
+    // Память освобождается автоматически
+    return 0;
+}</code><button class="copy-button" data-target="code13" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h3>shared_ptr</h3>
+                <pre><code class="language-cpp line-numbers" id="code14">void useSharedPtr() {
+    std::shared_ptr<int> ptr1 = std::make_shared<int>(100);
+    std::cout << "Счетчик ссылок: " << ptr1.use_count() << std::endl; // 1
+    
+    {
+        std::shared_ptr<int> ptr2 = ptr1; // Копирование
+        std::cout << "Счетчик ссылок: " << ptr1.use_count() << std::endl; // 2
+        std::cout << "Значение через ptr2: " << *ptr2 << std::endl;
+    } // ptr2 уничтожается
+    
+    std::cout << "Счетчик ссылок: " << ptr1.use_count() << std::endl; // 1
+    // Память освобождается когда последний shared_ptr уничтожается
+}</code><button class="copy-button" data-target="code14" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <div class="tip">
+                    <h3 class="tip__title">Когда использовать умные указатели</h3>
+                    <p><strong>unique_ptr:</strong> Единоличное владение ресурсом<br>
+                    <strong>shared_ptr:</strong> Совместное владение ресурсом<br>
+                    <strong>weak_ptr:</strong> Наблюдение без владения (избегание циклических ссылок)</p>
+                </div>
+                
+                <h2>Распространенные ошибки</h2>
+                <ul>
+                    <li><strong>Утечки памяти</strong> - не вызван delete для new</li>
+                    <li><strong>Двойное освобождение</strong> - повторный вызов delete</li>
+                    <li><strong>Использование после освобождения</strong> - доступ к памяти после delete</li>
+                    <li><strong>Неправильное соответствие операторов</strong> - new с delete[], new[] с delete</li>
+                    <li><strong>Исключения между new и delete</strong> - память не освобождается при исключении</li>
+                </ul>
+                
+                <h2>Инструменты для поиска ошибок памяти</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Инструмент</th>
+                                <th>Платформа</th>
+                                <th>Назначение</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Valgrind</td>
+                                <td>Linux/macOS</td>
+                                <td>Поиск утечек памяти</td>
+                            </tr>
+                            <tr>
+                                <td>AddressSanitizer</td>
+                                <td>Все платформы</td>
+                                <td>Поиск ошибок доступа к памяти</td>
+                            </tr>
+                            <tr>
+                                <td>Visual Studio Diagnostic Tools</td>
+                                <td>Windows</td>
+                                <td>Профилирование памяти</td>
+                            </tr>
+                            <tr>
+                                <td>Dr. Memory</td>
+                                <td>Windows/Linux</td>
+                                <td>Поиск ошибок памяти</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="tip">
+                    <h3 class="tip__title">Лучшие практики</h3>
+                    <p>1. Предпочитайте автоматическую память динамической, когда это возможно<br>
+                    2. Используйте умные указатели вместо сырых<br>
+                    3. Следуйте принципу RAII<br>
+                    4. Всегда проверяйте успешность выделения памяти<br>
+                    5. Устанавливайте указатели в nullptr после delete<br>
+                    6. Используйте инструменты для поиска утечек памяти</p>
+                </div>
+                
+                <h2>Заключение</h2>
+                <p>Динамическая память - это мощный инструмент C++, который требует осторожного обращения. Основные принципы:</p>
+                <ul>
+                    <li>Каждый new должен соответствовать delete</li>
+                    <li>Используйте new[] только с delete[]</li>
+                    <li>Предпочитайте умные указатели для автоматического управления</li>
+                    <li>Следуйте принципу RAII для предотвращения утечек</li>
+                    <li>Тестируйте код на утечки памяти</li>
+                </ul>
+            </article>
+            
+            <!-- Навигация между статьями -->
+            <div class="article-navigation">
+                <a href="references.html" class="button">← Предыдущая статья: Ссылки</a>
+                <a href="../../index.html" class="button">На главную</a>
+                <a href="pointer-functions.html" class="button">Следующая статья: Указатели на функции →</a>
+            </div>
+        </div>
+    </main>
+    
+    <div data-include="../../includes/footer.html"></div>
+
+    <!-- JavaScript -->
+    <script src="../../js/prism.js"></script>
+    <script src="../../js/copy-code.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="../../js/includes.js"></script>
+</body>
+</html>
