@@ -18,47 +18,7 @@
 </head>
 <body>
     <!-- Шапка сайта -->
-    <header class="header">
-        <div class="container">
-            <div class="header__inner">
-                <a href="../../index.html" class="logo">
-                    <span class="logo__icon">C++</span>
-                    <span class="logo__text">Вики</span>
-                </a>
-                
-                <!-- Навигация -->
-                <nav class="nav">
-                    <ul class="nav__list">
-                        <li class="nav__item"><a href="../../index.html" class="nav__link">Главная</a></li>
-                        <li class="nav__item"><a href="variables.html" class="nav__link active">Основы</a></li>
-                        <li class="nav__item"><a href="../functions/declaration.html" class="nav__link">Функции</a></li>
-                        <li class="nav__item"><a href="../pointers/pointers-basics.html" class="nav__link">Указатели</a></li>
-                        <li class="nav__item"><a href="../oop/classes.html" class="nav__link">ООП</a></li>
-                        <li class="nav__item"><a href="../stl/vectors.html" class="nav__link">STL</a></li>
-                    </ul>
-                </nav>
-                
-                <!-- Поиск -->
-                <div class="search">
-                    <form action="../../search.html" method="GET" class="search__form">
-                        <input type="text" name="q" placeholder="Поиск по справочнику..." class="search__input">
-                        <button type="submit" class="search__button">
-                            <svg class="search__icon" viewBox="0 0 24 24">
-                                <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                            </svg>
-                        </button>
-                    </form>
-                </div>
-                
-                <!-- Мобильное меню -->
-                <button class="menu-toggle" aria-label="Меню">
-                    <span class="menu-toggle__line"></span>
-                    <span class="menu-toggle__line"></span>
-                    <span class="menu-toggle__line"></span>
-                </button>
-            </div>
-        </div>
-    </header>
+    <div data-include="../../includes/header.html"></div>
 
     <!-- Основное содержимое -->
     <main class="main">
@@ -225,46 +185,12 @@ auto isActive = true;  // bool</code><button class="copy-button" data-target="co
         </div>
     </main>
 
-    <!-- Подвал -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer__inner">
-                <div class="footer__col">
-                    <h3 class="footer__title">C++ Вики</h3>
-                    <p class="footer__text">Справочник по языку программирования C++ для начинающих.</p>
-                </div>
-                
-                <div class="footer__col">
-                    <h3 class="footer__title">Разделы</h3>
-                    <ul class="footer__list">
-                        <li><a href="../../chapters/basics/variables.html" class="footer__link">Основы</a></li>
-                        <li><a href="../../chapters/functions/declaration.html" class="footer__link">Функции</a></li>
-                        <li><a href="../../chapters/pointers/pointers-basics.html" class="footer__link">Указатели</a></li>
-                        <li><a href="../../chapters/oop/classes.html" class="footer__link">ООП</a></li>
-                        <li><a href="../../chapters/stl/vectors.html" class="footer__link">STL</a></li>
-                    </ul>
-                </div>
-        
-                <div class="footer__col">
-                    <h3 class="footer__title">Автор проекта</h3>
-                    <ul class="footer__list">
-                        <li>Студент: Иванов И.И.</li>
-                        <li>Группа: ПИ-123</li>
-                        <li>ВУЗ: НИУ "МЭИ"</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer__bottom">
-                <p class="footer__copyright">2025 C++ Вики</p>
-                <a href="#" class="footer__to-top" id="to-top">Наверх ↑</a>
-            </div>
-        </div>
-    </footer>
+    <div data-include="../../includes/footer.html"></div>
 
     <!-- JavaScript -->
     <script src="../../js/prism.js"></script>
     <script src="../../js/copy-code.js"></script>
     <script src="../../js/main.js"></script>
+    <script src="../../js/includes.js"></script>
 </body>
 </html>

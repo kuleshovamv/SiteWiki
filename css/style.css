@@ -1084,3 +1084,42 @@ ul {
 ul li {
     margin-bottom: var(--space-xs);
 }
+
+/* ==========================================================================
+   Стили для списков
+   ========================================================================== */
+
+ol {
+    padding-left: 1.5em;
+    margin-bottom: var(--space-md);
+    list-style-position: outside;
+    counter-reset: item;
+}
+
+ol li {
+    margin-bottom: var(--space-sm);
+    padding-left: 0.5em;
+    position: relative;
+    list-style-type: none;
+}
+
+ol li:before {
+    content: counter(item) ".";
+    counter-increment: item;
+    position: absolute;
+    left: -1.5em;
+    width: 1.5em;
+    text-align: right;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+ol ol {
+    padding-left: 2em;
+    margin-top: var(--space-sm);
+}
+
+ol ol li:before {
+    left: -2em;
+    width: 2em;
+}
