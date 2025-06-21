@@ -1302,3 +1302,77 @@ img {
         padding-right: 60px;
     }
 }
+
+/* Кнопка "Наверх" */
+.to-top-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #ea7566 0%, #a2754b 100%);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1000;
+    
+    /* Начальное состояние - скрыта */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px) scale(0.8);
+    
+    /* Плавные переходы */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Тень */
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+}
+
+/* Состояние когда кнопка видима */
+.to-top-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+/* Hover эффект */
+.to-top-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
+    background: linear-gradient(135deg, #e65643 0%, #ad733c 100%);
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .to-top-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+}
+
+/* Дополнительная анимация при появлении */
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-5px) scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Применяем анимацию при первом появлении */
+.to-top-btn.visible:not(.no-animation) {
+    animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}

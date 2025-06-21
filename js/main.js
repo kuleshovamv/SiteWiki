@@ -1,22 +1,3 @@
-// Определение текущей страницы
-function setActiveNavItem() {
-    const navLinks = document.querySelectorAll('.nav__link');
-    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-    
-    navLinks.forEach(link => {
-        const linkPath = link.getAttribute('href').split('/').pop();
-        
-        // Сравниваем имена файлов
-        if (currentPath === linkPath || 
-            (currentPath === '' && linkPath === 'index.html') ||
-            (currentPath === 'index.html' && linkPath === 'index.html')) {
-            link.classList.add('active');
-        } else {
-            link.classList.remove('active');
-        }
-    });
-}
-
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
     // Мобильное меню
@@ -36,6 +17,25 @@ document.addEventListener('DOMContentLoaded', function() {
         Prism.highlightAll();
     }
 });
+
+// Определение текущей страницы
+function setActiveNavItem() {
+    const navLinks = document.querySelectorAll('.nav__link');
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    
+    navLinks.forEach(link => {
+        const linkPath = link.getAttribute('href').split('/').pop();
+        
+        // Сравниваем имена файлов
+        if (currentPath === linkPath || 
+            (currentPath === '' && linkPath === 'index.html') ||
+            (currentPath === 'index.html' && linkPath === 'index.html')) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+}
 
 /**
  * Инициализация мобильного меню
@@ -67,27 +67,54 @@ function initMobileMenu() {
  * Инициализация кнопки "Наверх"
  */
 function initScrollToTop() {
-    const toTopButton = document.getElementById('to-top');
+    // Создаем кнопку программно
+    const toTopButton = document.createElement('button');
+    toTopButton.id = 'to-top';
+    toTopButton.className = 'to-top-btn';
+    toTopButton.innerHTML = '↑';
+    toTopButton.setAttribute('aria-label', 'Вернуться наверх');
+    toTopButton.setAttribute('title', 'Вернуться наверх');
     
-    if (toTopButton) {
-        window.addEventListener('scroll', function() {
-            if (window.pageYOffset > 300) {
-                toTopButton.style.opacity = '1';
-                toTopButton.style.visibility = 'visible';
-            } else {
-                toTopButton.style.opacity = '0';
-                toTopButton.style.visibility = 'hidden';
-            }
-        });
-        
-        toTopButton.addEventListener('click', function(e) {
-            e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+    // Добавляем кнопку в body
+    document.body.appendChild(toTopButton);
+    
+    // Обработчик прокрутки с throttling для лучшей производительности
+    let isScrolling = false;
+    
+    window.addEventListener('scroll', function() {
+        if (!isScrolling) {
+            window.requestAnimationFrame(function() {
+                const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollY > 100) {
+                    toTopButton.classList.add('visible');
+                } else {
+                    toTopButton.classList.remove('visible');
+                }
+                
+                isScrolling = false;
             });
-        });
-    }
+            
+            isScrolling = true;
+        }
+    });
+    
+    // Обработчик клика
+    toTopButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Плавная прокрутка наверх
+        const scrollToTop = () => {
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (currentScroll > 0) {
+                window.requestAnimationFrame(scrollToTop);
+                window.scrollTo(0, currentScroll - (currentScroll / 8));
+            }
+        };
+        
+        scrollToTop();
+    });
 }
 
 /**
