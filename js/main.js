@@ -27,7 +27,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Анимации при прокрутке
     initScrollAnimations();
-    
+
+     // Инициализация бегущей строки
+     initMarquee();
+
     // Инициализация подсветки кода
     if (typeof Prism !== 'undefined') {
         Prism.highlightAll();
@@ -137,5 +140,49 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
-// УДАЛЕН проблемный обработчик кликов для навигации
-// Оставляем стандартную навигацию браузера
+function initMarquee() {
+    const marqueeContainer = document.querySelector('.marquee-js');
+    const marqueeInner = document.querySelector('.marquee-inner');
+    
+    if (!marqueeContainer || !marqueeInner) return;
+    
+    // Убираем CSS анимацию
+    marqueeInner.style.animation = 'none';
+    
+    // Получаем скорость из data-атрибута
+    const speed = parseFloat(marqueeContainer.dataset.speed) || 1;
+    
+    // Дублируем содержимое
+    const originalContent = marqueeInner.innerHTML;
+    marqueeInner.innerHTML = originalContent + originalContent;
+    
+    let translateX = 0;
+    const contentWidth = marqueeInner.scrollWidth / 2;
+    let isPaused = false;
+    
+    // Обработчики для паузы при наведении
+    marqueeContainer.addEventListener('mouseenter', () => {
+        isPaused = true;
+    });
+    
+    marqueeContainer.addEventListener('mouseleave', () => {
+        isPaused = false;
+    });
+    
+    function animate() {
+        if (!isPaused) {
+            translateX -= speed;
+            
+            // Когда достигли половины контента, сбрасываем позицию
+            if (Math.abs(translateX) >= contentWidth) {
+                translateX = 0;
+            }
+            
+            marqueeInner.style.transform = `translateX(${translateX}px)`;
+        }
+        
+        requestAnimationFrame(animate);
+    }
+    
+    animate();
+}

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Указатели на функции в C++ | C++ Вики</title>
+    <meta name="description" content="Подробное руководство по работе с указателями на функции в C++">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/prism.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <div data-include="../../includes/header.html"></div>
+
+    <!-- Основное содержимое -->
+    <main class="main">
+        <div class="container">
+            <!-- Хлебные крошки -->
+            <nav class="breadcrumbs">
+                <ul class="breadcrumbs__list">
+                    <li class="breadcrumbs__item"><a href="../../index.html" class="breadcrumbs__link">Главная</a></li>
+                    <li class="breadcrumbs__item"><a href="../pointers/pointers-basics.html" class="breadcrumbs__link">Указатели и ссылки</a></li>
+                    <li class="breadcrumbs__item">Указатели на функции</li>
+                </ul>
+            </nav>
+            
+            <!-- Заголовок -->
+            <h1 class="page-title">Указатели на функции в C++</h1>
+            
+            <!-- Введение -->
+            <section class="intro">
+                <p>Указатели на функции позволяют хранить адреса функций и вызывать их динамически во время выполнения программы. Это мощный инструмент, который используется для реализации обратных вызовов (callbacks), таблиц функций и полиморфного поведения.</p>
+                <p>В этом разделе вы изучите синтаксис указателей на функции, их практическое применение и современные альтернативы в C++.</p>
+            </section>
+            
+            <!-- Содержание статьи -->
+            <article class="article">
+                <h2>Основы указателей на функции</h2>
+                <p>Указатель на функцию хранит адрес функции в памяти. Основные характеристики:</p>
+                <ul>
+                    <li>Позволяют вызывать функции косвенно</li>
+                    <li>Могут передаваться как параметры в другие функции</li>
+                    <li>Могут храниться в массивах или структурах</li>
+                    <li>Используются для реализации стратегий и обратных вызовов</li>
+                </ul>
+                
+                <h3>Объявление указателя на функцию</h3>
+                <p>Синтаксис объявления указателя на функцию:</p>
+                <pre><code class="language-cpp line-numbers" id="code1">// Тип возвращаемого значения (*имя_указателя)(типы_параметров);
+int (*funcPtr)(int, int);  // Указатель на функцию, принимающую два int и возвращающую int</code><button class="copy-button" data-target="code1" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h3>Инициализация и использование</h3>
+                <pre><code class="language-cpp line-numbers" id="code2">#include &lt;iostream&gt;
+
+int add(int a, int b) {
+    return a + b;
+}
+
+int subtract(int a, int b) {
+    return a - b;
+}
+
+int main() {
+    // Инициализация указателя на функцию
+    int (*operation)(int, int) = add;
+    
+    // Вызов функции через указатель
+    std::cout << "3 + 5 = " << operation(3, 5) << std::endl;  // 8
+    
+    // Переназначение указателя
+    operation = subtract;
+    std::cout << "7 - 2 = " << operation(7, 2) << std::endl;  // 5
+    
+    return 0;
+}</code><button class="copy-button" data-target="code2" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Передача указателей на функции как параметры</h2>
+                <p>Указатели на функции часто используются для реализации стратегий и обратных вызовов:</p>
+                
+                <h3>Функция высшего порядка</h3>
+                <pre><code class="language-cpp line-numbers" id="code3">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cmath&gt;
+
+// Функция, принимающая указатель на функцию как параметр
+void transformArray(int* arr, int size, int (*transform)(int)) {
+    for (int i = 0; i < size; i++) {
+        arr[i] = transform(arr[i]);
+    }
+}
+
+// Примеры функций-преобразований
+int square(int x) { return x * x; }
+int cube(int x) { return x * x * x; }
+int absolute(int x) { return std::abs(x); }
+
+int main() {
+    int numbers[] = {1, -2, 3, -4, 5};
+    int size = sizeof(numbers) / sizeof(numbers[0]);
+    
+    // Применяем разные преобразования
+    transformArray(numbers, size, square);
+    // numbers теперь: [1, 4, 9, 16, 25]
+    
+    transformArray(numbers, size, absolute);
+    // numbers теперь: [1, 4, 9, 16, 25] (без изменений)
+    
+    int otherNumbers[] = {1, 2, 3, 4, 5};
+    transformArray(otherNumbers, size, cube);
+    // otherNumbers теперь: [1, 8, 27, 64, 125]
+    
+    return 0;
+}</code><button class="copy-button" data-target="code3" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Массивы указателей на функции</h2>
+                <p>Указатели на функции можно хранить в массивах для создания таблиц функций:</p>
+                
+                <pre><code class="language-cpp line-numbers" id="code4">#include &lt;iostream&gt;
+
+// Различные математические операции
+double add(double a, double b) { return a + b; }
+double subtract(double a, double b) { return a - b; }
+double multiply(double a, double b) { return a * b; }
+double divide(double a, double b) { return a / b; }
+
+int main() {
+    // Массив указателей на функции
+    double (*operations[])(double, double) = {add, subtract, multiply, divide};
+    
+    double x = 10, y = 5;
+    const char* operationNames[] = {"сложение", "вычитание", "умножение", "деление"};
+    
+    for (int i = 0; i < 4; i++) {
+        std::cout << operationNames[i] << ": " << operations[i](x, y) << std::endl;
+    }
+    
+    return 0;
+}</code><button class="copy-button" data-target="code4" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Возвращение указателей на функций из функций</h2>
+                <p>Функции могут возвращать указатели на другие функции:</p>
+                
+                <pre><code class="language-cpp line-numbers" id="code5">#include &lt;iostream&gt;
+
+// Функции-операции
+int increment(int x) { return x + 1; }
+int decrement(int x) { return x - 1; }
+int square(int x) { return x * x; }
+
+// Функция, возвращающая указатель на функцию
+int (*getOperation(char op))(int) {
+    switch(op) {
+        case '+': return increment;
+        case '-': return decrement;
+        case '^': return square;
+        default: return nullptr;
+    }
+}
+
+int main() {
+    int x = 5;
+    
+    // Получаем нужную операцию
+    int (*operation)(int) = getOperation('+');
+    if (operation) {
+        std::cout << "Результат: " << operation(x) << std::endl;  // 6
+    }
+    
+    operation = getOperation('^');
+    if (operation) {
+        std::cout << "Результат: " << operation(x) << std::endl;  // 25
+    }
+    
+    return 0;
+}</code><button class="copy-button" data-target="code5" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Указатели на функции-члены класса</h2>
+                <p>Для работы с методами классов используются специальные указатели:</p>
+                
+                <pre><code class="language-cpp line-numbers" id="code6">#include &lt;iostream&gt;
+
+class Calculator {
+public:
+    int add(int a, int b) { return a + b; }
+    int subtract(int a, int b) { return a - b; }
+};
+
+int main() {
+    Calculator calc;
+    
+    // Указатель на метод класса
+    int (Calculator::*operation)(int, int) = &Calculator::add;
+    
+    // Вызов метода через указатель
+    std::cout << "10 + 5 = " << (calc.*operation)(10, 5) << std::endl;  // 15
+    
+    // Переназначение указателя
+    operation = &Calculator::subtract;
+    std::cout << "10 - 5 = " << (calc.*operation)(10, 5) << std::endl;  // 5
+    
+    return 0;
+}</code><button class="copy-button" data-target="code6" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Современные альтернативы (C++11 и новее)</h2>
+                <p>В современном C++ рекомендуется использовать более безопасные альтернативы:</p>
+                
+                <h3>std::function</h3>
+                <pre><code class="language-cpp line-numbers" id="code7">#include &lt;iostream&gt;
+#include &lt;functional&gt;
+
+int multiply(int a, int b) {
+    return a * b;
+}
+
+int main() {
+    // Обертка для любой вызываемой сущности
+    std::function&lt;int(int, int)&gt; func = multiply;
+    
+    std::cout << "3 * 7 = " << func(3, 7) << std::endl;  // 21
+    
+    // Лямбда-функция
+    func = [](int a, int b) { return a + b; };
+    std::cout << "3 + 7 = " << func(3, 7) << std::endl;  // 10
+    
+    return 0;
+}</code><button class="copy-button" data-target="code7" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h3>Лямбда-выражения</h3>
+                <pre><code class="language-cpp line-numbers" id="code8">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+
+int main() {
+    std::vector&lt;int&gt; numbers = {5, 2, 8, 1, 9};
+    
+    // Сортировка с пользовательским компаратором
+    std::sort(numbers.begin(), numbers.end(), [](int a, int b) {
+        return a > b; // Сортировка по убыванию
+    });
+    
+    for (int num : numbers) {
+        std::cout << num << " ";  // 9 8 5 2 1
+    }
+    std::cout << std::endl;
+    
+    // Лямбда с захватом переменных
+    int threshold = 5;
+    auto isAboveThreshold = [threshold](int x) {
+        return x > threshold;
+    };
+    
+    std::cout << "Числа больше 5: ";
+    for (int num : numbers) {
+        if (isAboveThreshold(num)) {
+            std::cout << num << " ";  // 9 8
+        }
+    }
+    std::cout << std::endl;
+    
+    return 0;
+}</code><button class="copy-button" data-target="code8" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <div class="tip">
+                    <h3 class="tip__title">Когда что использовать</h3>
+                    <p><strong>Указатели на функции:</strong> Совместимость с C, простые случаи<br>
+                    <strong>std::function:</strong> Гибкость, поддержка лямбд и функторов<br>
+                    <strong>Лямбда-выражения:</strong> Локальные функции, замыкания</p>
+                </div>
+                
+                <h2>Практические примеры применения</h2>
+                
+                <h3>Реализация стратегии</h3>
+                <pre><code class="language-cpp line-numbers" id="code9">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+// Стратегии сортировки
+void bubbleSort(std::vector&lt;int&gt;& arr) {
+    // Реализация пузырьковой сортировки
+    for (size_t i = 0; i < arr.size(); i++) {
+        for (size_t j = 0; j < arr.size() - i - 1; j++) {
+            if (arr[j] > arr[j+1]) {
+                std::swap(arr[j], arr[j+1]);
+            }
+        }
+    }
+}
+
+void selectionSort(std::vector&lt;int&gt;& arr) {
+    // Реализация сортировки выбором
+    for (size_t i = 0; i < arr.size(); i++) {
+        size_t minIndex = i;
+        for (size_t j = i+1; j < arr.size(); j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        std::swap(arr[i], arr[minIndex]);
+    }
+}
+
+class Sorter {
+    using SortStrategy = void(*)(std::vector&lt;int&gt;&);
+    SortStrategy strategy;
+    
+public:
+    Sorter(SortStrategy s) : strategy(s) {}
+    
+    void sort(std::vector&lt;int&gt;& arr) {
+        strategy(arr);
+    }
+};
+
+int main() {
+    std::vector&lt;int&gt; data = {5, 2, 9, 1, 5, 6};
+    
+    Sorter sorter1(bubbleSort);
+    sorter1.sort(data);
+    for (int num : data) {
+        std::cout << num << " ";  // 1 2 5 5 6 9
+    }
+    std::cout << std::endl;
+    
+    data = {5, 2, 9, 1, 5, 6};
+    Sorter sorter2(selectionSort);
+    sorter2.sort(data);
+    for (int num : data) {
+        std::cout << num << " ";  // 1 2 5 5 6 9
+    }
+    std::cout << std::endl;
+    
+    return 0;
+}</code><button class="copy-button" data-target="code9" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h3>Обратные вызовы (callbacks)</h3>
+                <pre><code class="language-cpp line-numbers" id="code10">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cmath&gt;
+
+// Функция для обработки данных с callback
+void processData(const std::vector&lt;double&gt;& data, 
+                double (*processor)(double), 
+                void (*logger)(const std::string&)) {
+    for (double value : data) {
+        double result = processor(value);
+        logger("Обработано значение: " + std::to_string(value) + 
+               ", результат: " + std::to_string(result));
+    }
+}
+
+// Примеры функций-процессоров
+double squareRoot(double x) { return std::sqrt(x); }
+double cubeRoot(double x) { return std::cbrt(x); }
+
+// Функция для логирования
+void consoleLogger(const std::string& message) {
+    std::cout << message << std::endl;
+}
+
+int main() {
+    std::vector&lt;double&gt; data = {1.0, 8.0, 27.0, 64.0};
+    
+    processData(data, squareRoot, consoleLogger);
+    processData(data, cubeRoot, consoleLogger);
+    
+    return 0;
+}</code><button class="copy-button" data-target="code10" aria-label="Копировать код">Копировать код</button></pre>
+                
+                <h2>Распространенные ошибки</h2>
+                <ul>
+                    <li><strong>Неправильный синтаксис</strong> - ошибки в объявлении указателей на функции</li>
+                    <li><strong>Несоответствие типов</strong> - попытка присвоить указатель на функцию с несовместимой сигнатурой</li>
+                    <li><strong>Вызов nullptr</strong> - попытка вызвать нулевой указатель на функцию</li>
+                    <li><strong>Игнорирование возвращаемого значения</strong> - когда функция возвращает указатель на функцию</li>
+                    <li><strong>Путаница с методами классов</strong> - неправильное использование указателей на методы</li>
+                </ul>
+                
+                <div class="tip">
+                    <h3 class="tip__title">Лучшие практики</h3>
+                    <p>1. Используйте typedef или using для упрощения синтаксиса<br>
+                    2. Проверяйте указатели на nullptr перед вызовом<br>
+                    3. Предпочитайте std::function в современном C++<br>
+                    4. Для методов классов используйте правильный синтаксис<br>
+                    5. Документируйте ожидаемую сигнатуру функций для обратных вызовов</p>
+                </div>
+                
+                <h2>Заключение</h2>
+                <p>Указатели на функции - это мощный инструмент C++, который позволяет реализовывать гибкие и расширяемые архитектуры. Основные принципы:</p>
+                <ul>
+                    <li>Указатели на функции позволяют вызывать функции косвенно</li>
+                    <li>Они используются для реализации стратегий и обратных вызовов</li>
+                    <li>Современный C++ предлагает более безопасные альтернативы (std::function, лямбды)</li>
+                    <li>Для методов классов используется специальный синтаксис</li>
+                    <li>Всегда проверяйте указатели на nullptr перед вызовом</li>
+                </ul>
+            </article>
+            
+            <!-- Навигация между статьями -->
+            <div class="article-navigation">
+                <a href="dynamic-memory.html" class="button">← Предыдущая статья: Динамическая память</a>
+                <a href="../../index.html" class="button">На главную</a>
+            </div>
+        </div>
+    </main>
+    
+    <div data-include="../../includes/footer.html"></div>
+
+    <!-- JavaScript -->
+    <script src="../../js/prism.js"></script>
+    <script src="../../js/copy-code.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="../../js/includes.js"></script>
+</body>
+</html>

@@ -36,8 +36,6 @@
                         <li class="nav__item"><a href="chapters/basics/variables.html" class="nav__link">Основы</a></li>
                         <li class="nav__item"><a href="chapters/functions/declaration.html" class="nav__link">Функции</a></li>
                         <li class="nav__item"><a href="chapters/pointers/pointers-basics.html" class="nav__link">Указатели</a></li>
-                        <li class="nav__item"><a href="chapters/oop/classes.html" class="nav__link">ООП</a></li>
-                        <li class="nav__item"><a href="chapters/stl/vectors.html" class="nav__link">STL</a></li>
                     </ul>
                 </nav>
                 
@@ -62,6 +60,18 @@
             </div>
         </div>
     </header>
+
+    <!-- Бегущая строка -->
+    <div class="marquee-js" data-speed="1">
+        <div class="marquee-inner">
+            <span>Продам гараж. Пишите в СМС на: +7 999 214 14 48</span>
+            <span>Куплю мотоцикл Kawasaki ER6n, пишите на почту buymototmn@mail.ru </span>
+            <span>Продам ВАЗ 2114. Цена 400 000р, искать на рынке авто</span>
+            <span>Куплю права категории А, ГИБДД не беспокоить, звоните +7 999 420 20 20</span>
+            <span>Здесь могла быть ваша реклама</span>
+            <span>Ищу подработку на лето, писать в ВК: @svobodnychelovek</span>
+        </div>
+    </div>
 
     <!-- Основное содержимое -->
     <main class="main">
@@ -147,64 +157,6 @@
                             <a href="chapters/pointers/pointers-basics.html" class="card__link">Начать изучение</a>
                         </div>
                     </article>
-                    
-                    <!-- ООП -->
-                    <article class="card">
-                        <div class="card__header">
-                            <h3 class="card__title">Объектно-ориентированное программирование</h3>
-                            <span class="card__icon">🏛️</span>
-                        </div>
-                        <div class="card__content">
-                            <p>C++ поддерживает ООП - парадигму, основанную на объектах, классах и их взаимодействиях.</p>
-                            <ul class="card__topics">
-                                <li><a href="chapters/oop/classes.html">Классы и объекты</a></li>
-                                <li><a href="chapters/oop/constructors.html">Конструкторы и деструкторы</a></li>
-                                <li><a href="chapters/oop/inheritance.html">Наследование</a></li>
-                                <li><a href="chapters/oop/polymorphism.html">Полиморфизм</a></li>
-                            </ul>
-                        </div>
-                        <div class="card__footer">
-                            <a href="chapters/oop/classes.html" class="card__link">Начать изучение</a>
-                        </div>
-                    </article>
-                    
-                    <!-- STL -->
-                    <article class="card">
-                        <div class="card__header">
-                            <h3 class="card__title">Стандартная библиотека (STL)</h3>
-                            <span class="card__icon">📚</span>
-                        </div>
-                        <div class="card__content">
-                            <p>STL предоставляет мощные инструменты: контейнеры, алгоритмы и итераторы для эффективной работы.</p>
-                            <ul class="card__topics">
-                                <li><a href="chapters/stl/vectors.html">Векторы и строки</a></li>
-                                <li><a href="chapters/stl/algorithms.html">Алгоритмы</a></li>
-                                <li><a href="chapters/stl/iterators.html">Итераторы</a></li>
-                                <li><a href="chapters/stl/strings.html">Потоки ввода/вывода</a></li>
-                            </ul>
-                        </div>
-                        <div class="card__footer">
-                            <a href="chapters/stl/vectors.html" class="card__link">Начать изучение</a>
-                        </div>
-                    </article>
-                    
-                    <!-- Быстрый старт -->
-                    <article class="card card--highlight">
-                        <div class="card__header">
-                            <h3 class="card__title">Быстрый старт</h3>
-                            <span class="card__icon">🚀</span>
-                        </div>
-                        <div class="card__content">
-                            <p>Ваша первая программа на C++:</p>
-                            <pre><code class="language-cpp" id="code1">#include &lt;iostream&gt;
-
-int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
-}</code><button class="copy-button" data-target="code1" aria-label="Копировать код">Копировать код</button></pre>
-                        </div>
-                    </article>
-                </div>
             </section>
             
             <!-- Дополнительная информация -->
@@ -232,7 +184,36 @@ int main() {
                         </ul>
                     </div>
                 </div>
-            </section>
+                <section class="video-section">
+                    <h2>Введение в C++</h2>
+                    <div class="video-container">
+                        <video controls width="100%">
+                            <source src="videos/VSCodeC++settings.mp4" type="video/mp4">
+                            Ваш браузер не поддерживает видео.
+                        </video>
+                    </div>
+                </section>
+                <section class="ide-section">
+                    <h2 class="ide-section__title">Популярные IDE для C++</h2>
+                    <div class="ide-grid">
+                      <figure class="ide-card">
+                        <img src="images/viusalstudio.png" alt="Visual Studio" class="ide-image">
+                        <figcaption class="ide-caption">Microsoft Visual Studio</figcaption>
+                      </figure>
+                      <figure class="ide-card">
+                        <img src="images/visualstudiocode.png" alt="Visual Studio Code" class="ide-image">
+                        <figcaption class="ide-caption">Microsoft Visual Studio Code</figcaption>
+                      </figure>
+                      <figure class="ide-card">
+                        <img src="images/clion.png" alt="CLion" class="ide-image">
+                        <figcaption class="ide-caption">JetBrains CLion</figcaption>
+                      </figure>
+                      <figure class="ide-card">
+                        <img src="images/eclipse.jpeg" alt="Eclipse" class="ide-image">
+                        <figcaption class="ide-caption">Eclipse</figcaption>
+                      </figure>
+                    </div>
+                  </section>
         </div>
     </main>
 
