@@ -1,3 +1,22 @@
+// Определение текущей страницы
+function setActiveNavItem() {
+    const navLinks = document.querySelectorAll('.nav__link');
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    
+    navLinks.forEach(link => {
+        const linkPath = link.getAttribute('href').split('/').pop();
+        
+        // Сравниваем имена файлов
+        if (currentPath === linkPath || 
+            (currentPath === '' && linkPath === 'index.html') ||
+            (currentPath === 'index.html' && linkPath === 'index.html')) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+}
+
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
     // Мобильное меню
@@ -117,3 +136,6 @@ function showNotification(message, type = 'info') {
         }, 300);
     }, 3000);
 }
+
+// УДАЛЕН проблемный обработчик кликов для навигации
+// Оставляем стандартную навигацию браузера
