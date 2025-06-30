@@ -47,12 +47,27 @@ function initScrollAnimations() {
                 });
             }, {
                 threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
+                rootMargin: '50px 0px 50px 0px' // Увеличиваем область наблюдения
             });
             
             animateElements.forEach(element => {
                 observer.observe(element);
             });
+
+            // ИСПРАВЛЕНИЕ: Сразу показываем элементы, которые уже в видимой области
+            setTimeout(() => {
+                animateElements.forEach(element => {
+                    const rect = element.getBoundingClientRect();
+                    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                    
+                    if (isVisible) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                        observer.unobserve(element);
+                    }
+                });
+            }, 100);
+            
         } else {
             // Fallback для старых браузеров
             animateElements.forEach(el => {
