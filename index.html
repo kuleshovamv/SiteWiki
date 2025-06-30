@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
     
     <!-- Иконка -->
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/icon.png" type="image/x-icon">
 </head>
 <body>
     <!-- Шапка сайта -->
@@ -32,24 +32,12 @@
                 <!-- Навигация -->
                 <nav class="nav">
                     <ul class="nav__list">
-                        <li class="nav__item"><a href="index.html" class="nav__link">Главная</a></li>
+                        <li class="nav__item"><a href="index.html" class="nav__link active" >Главная</a></li>
                         <li class="nav__item"><a href="chapters/basics/variables.html" class="nav__link">Основы</a></li>
                         <li class="nav__item"><a href="chapters/functions/declaration.html" class="nav__link">Функции</a></li>
                         <li class="nav__item"><a href="chapters/pointers/pointers-basics.html" class="nav__link">Указатели</a></li>
                     </ul>
                 </nav>
-                
-                <!-- Поиск -->
-                <div class="search">
-                    <form action="search.html" method="GET" class="search__form">
-                        <input type="text" name="q" placeholder="Поиск по справочнику..." class="search__input">
-                        <button type="submit" class="search__button">
-                            <svg class="search__icon" viewBox="0 0 24 24">
-                                <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                            </svg>
-                        </button>
-                    </form>
-                </div>
                 
                 <!-- Мобильное меню -->
                 <button class="menu-toggle" aria-label="Меню">
@@ -62,14 +50,15 @@
     </header>
 
     <!-- Бегущая строка -->
-    <div class="marquee-js" data-speed="1">
+    <div class="marquee-js" data-speed="0.7">
         <div class="marquee-inner">
-            <span>Продам гараж. Пишите в СМС на: +7 999 214 14 48</span>
-            <span>Куплю мотоцикл Kawasaki ER6n, пишите на почту buymototmn@mail.ru </span>
-            <span>Продам ВАЗ 2114. Цена 400 000р, искать на рынке авто</span>
-            <span>Куплю права категории А, ГИБДД не беспокоить, звоните +7 999 420 20 20</span>
-            <span>Здесь могла быть ваша реклама</span>
-            <span>Ищу подработку на лето, писать в ВК: @svobodnychelovek</span>
+            <span>Совет: Всегда инициализируйте переменные при объявлении</span>
+            <span>Знаете ли вы? C++ был создан Бьярне Страуструпом в 1979 году</span>
+            <span>Важно: Используйте умные указатели вместо сырых (unique_ptr, shared_ptr)</span>
+            <span>Совет: Предпочитайте std::vector вместо массивов в стиле C</span>
+            <span>Факт: C++ занимает 4 место в рейтинге TIOBE (2025 год)</span>
+            <span>Совет: Используйте const везде, где это возможно</span>
+            <span>Знаете ли вы? auto появился в C++11 для автоматического вывода типов</span>
         </div>
     </div>
 
@@ -157,6 +146,7 @@
                             <a href="chapters/pointers/pointers-basics.html" class="card__link">Начать изучение</a>
                         </div>
                     </article>
+                </div>
             </section>
             
             <!-- Дополнительная информация -->
@@ -193,6 +183,7 @@
                         </video>
                     </div>
                 </section>
+            </section>
                 <section class="ide-section">
                     <h2 class="ide-section__title">Популярные IDE для C++</h2>
                     <div class="ide-grid">
@@ -227,20 +218,11 @@
                 </div>
                 
                 <div class="footer__col">
-                    <h3 class="footer__title">Разделы</h3>
-                    <ul class="footer__list">
-                        <li><a href="chapters/basics/variables.html" class="footer__link">Основы</a></li>
-                        <li><a href="chapters/functions/declaration.html" class="footer__link">Функции</a></li>
-                        <li><a href="chapters/pointers/pointers-basics.html" class="footer__link">Указатели</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer__col">
                     <h3 class="footer__title">Автор проекта</h3>
                     <ul class="footer__list">
-                        <li>Студент: Иванов И.И.</li>
-                        <li>Группа: ПИ-123</li>
-                        <li>ВУЗ: НИУ "МЭИ"</li>
+                        <li>Студент: Кулешова Мария Вячеславовна</li>
+                        <li>Группа: ИСАУб-24-1</li>
+                        <li>ТЮМЕНСКИЙ ИНДУСТРИАЛЬНЫЙ УНИВЕРСИТЕТ</li>
                     </ul>
                 </div>
             </div>

@@ -351,48 +351,6 @@ blockquote {
     background-color: var(--accent-color);
 }
 
-/* Поиск */
-.search {
-    margin-left: var(--space-md);
-    position: relative;
-    width: 250px;
-}
-
-.search__form {
-    display: flex;
-}
-
-.search__input {
-    flex-grow: 1;
-    padding: var(--space-sm) var(--space-md);
-    border: none;
-    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
-    font-family: var(--font-main);
-    outline: none;
-}
-
-.search__button {
-    background-color: var(--accent-color);
-    border: none;
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    padding: var(--space-sm);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color var(--transition-fast);
-}
-
-.search__button:hover {
-    background-color: var(--accent-dark);
-}
-
-.search__icon {
-    width: 20px;
-    height: 20px;
-    fill: var(--text-on-primary);
-}
-
 /* Мобильное меню */
 .menu-toggle {
     display: none;
@@ -583,12 +541,6 @@ blockquote {
     
     .header__inner {
         flex-wrap: wrap;
-    }
-    
-    .search {
-        order: 3;
-        width: 100%;
-        margin: var(--space-md) 0 0;
     }
 
     .container {
@@ -877,50 +829,6 @@ blockquote {
 .no-results__message {
     font-size: var(--h3-size);
     color: var(--text-light);
-}
-
-/* Страница поиска */
-.search-results__count {
-    margin-bottom: var(--space-lg);
-    color: var(--text-light);
-}
-
-.search-results__list {
-    display: grid;
-    gap: var(--space-md);
-}
-
-.search-result {
-    background-color: white;
-    padding: var(--space-md);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-}
-
-.search-result__title {
-    margin-bottom: var(--space-xs);
-}
-
-.search-result__title a {
-    color: var(--primary-color);
-}
-
-.search-result__url {
-    font-size: var(--small-font-size);
-    color: var(--text-light);
-    margin-bottom: var(--space-sm);
-}
-
-.search-result__content {
-    margin-bottom: var(--space-sm);
-}
-
-.search-result__category {
-    display: inline-block;
-    padding: var(--space-xs) var(--space-sm);
-    background-color: var(--background-dark);
-    border-radius: var(--radius-sm);
-    font-size: var(--small-font-size);
 }
 
 mark {

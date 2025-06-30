@@ -15,10 +15,39 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+
+    <!-- Иконка -->
+    <link rel="icon" href="../../images/icon.png" type="image/x-icon">
 </head>
 <body>
     <!-- Шапка сайта -->
-    <div data-include="../../includes/header.html"></div>
+    <header class="header">
+    <div class="container">
+        <div class="header__inner">
+            <a href="../../index.html" class="logo">
+                <span class="logo__icon">C++</span>
+                <span class="logo__text">Вики</span>
+            </a>
+            
+            <!-- Навигация -->
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="../../index.html" class="nav__link">Главная</a></li>
+                    <li class="nav__item"><a href="../basics/variables.html" class="nav__link">Основы</a></li>
+                    <li class="nav__item"><a href="../functions/declaration.html" class="nav__link">Функции</a></li>
+                    <li class="nav__item"><a href="../pointers/pointers-basics.html" class="nav__link">Указатели</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Мобильное меню -->
+            <button class="menu-toggle" aria-label="Меню">
+                <span class="menu-toggle__line"></span>
+                <span class="menu-toggle__line"></span>
+                <span class="menu-toggle__line"></span>
+            </button>
+        </div>
+    </div>
+</header>
 
     <!-- Основное содержимое -->
     <main class="main">
@@ -319,12 +348,35 @@ int main() {
         </div>
     </main>
     
-    <div data-include="../../includes/footer.html"></div>
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <div class="footer__col">
+                    <h3 class="footer__title">C++ Вики</h3>
+                    <p class="footer__text">Справочник по языку программирования C++ для начинающих.</p>
+                </div>
+                
+                <div class="footer__col">
+                    <h3 class="footer__title">Автор проекта</h3>
+                    <ul class="footer__list">
+                        <li>Студент: Кулешова Мария Вячеславовна</li>
+                        <li>Группа: ИСАУб-24-1</li>
+                        <li>ТЮМЕНСКИЙ ИНДУСТРИАЛЬНЫЙ УНИВЕРСИТЕТ</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p class="footer__copyright">2025 C++ Вики</p>
+            </div>
+        </div>
+    </footer>
 
     <!-- JavaScript -->
     <script src="../../js/prism.js"></script>
     <script src="../../js/copy-code.js"></script>
     <script src="../../js/main.js"></script>
-    <script src="../../js/includes.js"></script>
+    
 </body>
 </html>

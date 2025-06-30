@@ -1,35 +1,96 @@
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
-    // Мобильное меню
+    // Инициализация базовых компонентов
     initMobileMenu();
-    
-    // Кнопка "Наверх"
     initScrollToTop();
+    initMarquee();
+    setActiveNavItem();
     
-    // Анимации при прокрутке
-    initScrollAnimations();
-
-     // Инициализация бегущей строки
-     initMarquee();
-
-    // Инициализация подсветки кода
+    // Подсветка кода
     if (typeof Prism !== 'undefined') {
         Prism.highlightAll();
     }
+
+    // Инициализация анимаций после полной загрузки страницы
+    if (document.readyState === 'complete') {
+        initScrollAnimations();
+    } else {
+        window.addEventListener('load', initScrollAnimations);
+    }
 });
+
+function initScrollAnimations() {
+    const animateElements = document.querySelectorAll('.card, .tip, .article');
+    
+    // Сначала скрываем все элементы
+    animateElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'none'; // Отключаем переходы на начальном этапе
+    });
+
+    // Даем браузеру время на отрисовку
+    requestAnimationFrame(() => {
+        // Включаем переходы
+        animateElements.forEach(el => {
+            el.style.transition = 'opacity 1.0s ease, transform 0.5s ease';
+        });
+
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            animateElements.forEach(element => {
+                observer.observe(element);
+            });
+        } else {
+            // Fallback для старых браузеров
+            animateElements.forEach(el => {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            });
+        }
+    });
+}
 
 // Определение текущей страницы
 function setActiveNavItem() {
     const navLinks = document.querySelectorAll('.nav__link');
-    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    const currentPath = window.location.pathname;
     
     navLinks.forEach(link => {
-        const linkPath = link.getAttribute('href').split('/').pop();
+        const linkHref = link.getAttribute('href');
+        let isActive = false;
         
-        // Сравниваем имена файлов
-        if (currentPath === linkPath || 
-            (currentPath === '' && linkPath === 'index.html') ||
-            (currentPath === 'index.html' && linkPath === 'index.html')) {
+        // Определяем активную ссылку
+        if (linkHref === '../../index.html' || linkHref === 'index.html') {
+            // Главная страница
+            isActive = currentPath.endsWith('index.html') || 
+                      currentPath === '/' || 
+                      currentPath.endsWith('/');
+        } else if (linkHref.includes('/basics/')) {
+            // Раздел "Основы"
+            isActive = currentPath.includes('/basics/');
+        } else if (linkHref.includes('/functions/')) {
+            // Раздел "Функции"
+            isActive = currentPath.includes('/functions/');
+        } else if (linkHref.includes('/pointers/')) {
+            // Раздел "Указатели"
+            isActive = currentPath.includes('/pointers/');
+        }
+        
+        // Применяем или убираем класс active
+        if (isActive) {
             link.classList.add('active');
         } else {
             link.classList.remove('active');
@@ -78,6 +139,11 @@ function initScrollToTop() {
     // Добавляем кнопку в body
     document.body.appendChild(toTopButton);
     
+    // Переменные для управления анимацией
+    let isAnimating = false;
+    let animationId = null;
+    let lastUserInteraction = 0;
+    
     // Обработчик прокрутки с throttling для лучшей производительности
     let isScrolling = false;
     
@@ -86,6 +152,7 @@ function initScrollToTop() {
             window.requestAnimationFrame(function() {
                 const scrollY = window.pageYOffset || document.documentElement.scrollTop;
                 
+                // Показываем/скрываем кнопку
                 if (scrollY > 100) {
                     toTopButton.classList.add('visible');
                 } else {
@@ -99,50 +166,79 @@ function initScrollToTop() {
         }
     });
     
-    // Обработчик клика
+    // Функция остановки анимации
+    function stopAnimation() {
+        if (isAnimating && animationId) {
+            cancelAnimationFrame(animationId);
+            isAnimating = false;
+            animationId = null;
+        }
+    }
+    
+    // Отслеживаем пользовательские действия
+    window.addEventListener('wheel', function() {
+        lastUserInteraction = Date.now();
+        stopAnimation();
+    }, { passive: true });
+    
+    window.addEventListener('touchstart', function() {
+        lastUserInteraction = Date.now();
+        stopAnimation();
+    }, { passive: true });
+    
+    window.addEventListener('touchmove', function() {
+        lastUserInteraction = Date.now();
+        stopAnimation();
+    }, { passive: true });
+    
+    window.addEventListener('keydown', function(e) {
+        if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', 'Space'].includes(e.code)) {
+            lastUserInteraction = Date.now();
+            stopAnimation();
+        }
+    });
+    
+    // Обработчик клика на кнопку
     toTopButton.addEventListener('click', function(e) {
         e.preventDefault();
         
+        // Если анимация уже идет, не запускаем новую
+        if (isAnimating) return;
+        
+        isAnimating = true;
+        lastUserInteraction = 0; // Сбрасываем время последнего взаимодействия
+        
         // Плавная прокрутка наверх
         const scrollToTop = () => {
+            // Проверяем, не было ли пользовательского взаимодействия
+            if (Date.now() - lastUserInteraction < 100 && lastUserInteraction > 0) {
+                isAnimating = false;
+                animationId = null;
+                return;
+            }
+            
             const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
             
             if (currentScroll > 0) {
-                window.requestAnimationFrame(scrollToTop);
-                window.scrollTo(0, currentScroll - (currentScroll / 8));
+                const nextScroll = Math.max(0, currentScroll - (currentScroll / 30));
+                window.scrollTo(0, nextScroll);
+                
+                if (nextScroll > 0) {
+                    animationId = window.requestAnimationFrame(scrollToTop);
+                } else {
+                    // Анимация завершена
+                    isAnimating = false;
+                    animationId = null;
+                }
+            } else {
+                // Анимация завершена
+                isAnimating = false;
+                animationId = null;
             }
         };
         
         scrollToTop();
     });
-}
-
-/**
- * Анимации элементов при прокрутке
- */
-function initScrollAnimations() {
-    const animateElements = document.querySelectorAll('.card, .tip');
-    
-    if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate');
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-        
-        animateElements.forEach(element => {
-            observer.observe(element);
-        });
-    } else {
-        // Fallback для браузеров без IntersectionObserver
-        animateElements.forEach(element => {
-            element.classList.add('animate');
-        });
-    }
 }
 
 /**
