@@ -156,62 +156,61 @@
                 
                 <h3>Другие основные типы</h3>
                 <pre><code class="language-cpp line-numbers" id="code1">bool isActive = true;  // Логический тип (true/false)
-                    char symbol = 'A';     // Символьный тип
-                    wchar_t wideChar = L'Я'; // Широкий символ
-                    char16_t utf16Char = u'字'; // UTF-16 символ
-                    char32_t utf32Char = U'🍕'; // UTF-32 символ</code><button class="copy-button" data-target="code1" aria-label="Копировать код">Копировать код</button></pre>
+char symbol = 'A';     // Символьный тип
+wchar_t wideChar = L'Я'; // Широкий символ
+char16_t utf16Char = u'字'; // UTF-16 символ
+char32_t utf32Char = U'🍕'; // UTF-32 символ</code><button class="copy-button" data-target="code1" aria-label="Копировать код">Копировать код</button></pre>
                 
                 <h2>Модификаторы типов</h2>
                 <p>В C++ можно изменять свойства базовых типов с помощью модификаторов:</p>
                 
                 <pre><code class="language-cpp line-numbers" id="code2">// Модификаторы знака
-                    signed int a = -10;    // Знаковое целое (по умолчанию)
-                    unsigned int b = 10;   // Беззнаковое целое
-                    
-                    // Модификаторы размера
-                    short int c = 100;     // Короткое целое
-                    long int d = 100000;   // Длинное целое
-                    long long int e = 1'000'000'000'000; // Очень длинное целое</code><button class="copy-button" data-target="code2" aria-label="Копировать код">Копировать код</button></pre>
+signed int a = -10;    // Знаковое целое (по умолчанию)
+unsigned int b = 10;   // Беззнаковое целое
+
+// Модификаторы размера
+short int c = 100;     // Короткое целое
+long int d = 100000;   // Длинное целое
+long long int e = 1'000'000'000'000; // Очень длинное целое</code><button class="copy-button" data-target="code2" aria-label="Копировать код">Копировать код</button></pre>
                 
                 <h2>Размеры типов и оператор sizeof</h2>
                 <p>Размеры типов могут отличаться в зависимости от системы и компилятора. Узнать размер можно с помощью оператора <code>sizeof</code>:</p>
                 
                 <pre><code class="language-cpp line-numbers" id="code3">#include &lt;iostream&gt;
-
-                    int main() {
-                        std::cout << "Размеры типов на этой системе:" << std::endl;
-                        std::cout << "bool: " << sizeof(bool) << " байт" << std::endl;
-                        std::cout << "char: " << sizeof(char) << " байт" << std::endl;
-                        std::cout << "int: " << sizeof(int) << " байт" << std::endl;
-                        std::cout << "double: " << sizeof(double) << " байт" << std::endl;
-                        std::cout << "long long: " << sizeof(long long) << " байт" << std::endl;
-                        
-                        return 0;
-                    }</code><button class="copy-button" data-target="code3" aria-label="Копировать код">Копировать код</button></pre>
+int main() {
+    std::cout << "Размеры типов на этой системе:" << std::endl;
+    std::cout << "bool: " << sizeof(bool) << " байт" << std::endl;
+    std::cout << "char: " << sizeof(char) << " байт" << std::endl;
+    std::cout << "int: " << sizeof(int) << " байт" << std::endl;
+    std::cout << "double: " << sizeof(double) << " байт" << std::endl;
+    std::cout << "long long: " << sizeof(long long) << " байт" << std::endl;
+    
+    return 0;
+}</code><button class="copy-button" data-target="code3" aria-label="Копировать код">Копировать код</button></pre>
                 
                 <h2>Псевдонимы типов (typedef и using)</h2>
                 <p>В C++ можно создавать синонимы для типов:</p>
                 
                 <pre><code class="language-cpp line-numbers" id="code4">// Старый стиль (C)
-                    typedef unsigned long ulong;
+typedef unsigned long ulong;
                     
-                    // Новый стиль (C++11)
-                    using byte = unsigned char;
-                    using pInt = int*;
+// Новый стиль (C++11)
+using byte = unsigned char;
+using pInt = int*;
                     
-                    // Использование
-                    ulong bigNumber = 1'000'000'000UL;
-                    byte data = 0xFF;
-                    pInt ptr = nullptr;</code><button class="copy-button" data-target="code4" aria-label="Копировать код">Копировать код</button></pre>
+// Использование
+ulong bigNumber = 1'000'000'000UL;
+byte data = 0xFF;
+pInt ptr = nullptr;</code><button class="copy-button" data-target="code4" aria-label="Копировать код">Копировать код</button></pre>
                 
                 <h2>Автоматическое определение типа (auto)</h2>
                 <p>С C++11 можно использовать ключевое слово <code>auto</code> для автоматического определения типа:</p>
                 
                 <pre><code class="language-cpp line-numbers" id="code5">auto number = 42;          // int
-                    auto price = 19.99;        // double
-                    auto name = "Alice";       // const char*
-                    auto isActive = true;      // bool
-                    auto values = {1, 2, 3};   // std::initializer_list&lt;int&gt;</code><button class="copy-button" data-target="code5" aria-label="Копировать код">Копировать код</button></pre>
+auto price = 19.99;        // double
+auto name = "Alice";       // const char*
+auto isActive = true;      // bool
+auto values = {1, 2, 3};   // std::initializer_list&lt;int&gt;</code><button class="copy-button" data-target="code5" aria-label="Копировать код">Копировать код</button></pre>
                 
                 <div class="tip">
                     <h3 class="tip__title">Совет по выбору типов</h3>
